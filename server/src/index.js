@@ -2,9 +2,11 @@ const app = require("./app.js");
 const dotenv = require("dotenv").config();
 const connectDB = require("./db/index.js");
 
-app.use("/", (req, res) => {
-  res.status(200).send("Hello, you are at Home");
-});
+// app.use("/", (req, res) => {
+//   res.status(200).send("Hello, you are at Home");
+// });
+
+
 
 connectDB()
   .then(() => {
