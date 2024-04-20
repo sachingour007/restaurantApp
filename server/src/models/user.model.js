@@ -1,5 +1,5 @@
 const { Schema, default: mongoose } = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const userSchema = new Schema(
@@ -52,7 +52,6 @@ const userSchema = new Schema(
 /**We bcrypt the password by bcryp and mongoose Pre hook method */
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next(); //we check when password change then run the function
-
   try {
     const saltRound = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(this.password, saltRound);
@@ -63,7 +62,8 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  console.log("Modal file", password, this, typeof this.password);
+  return bcrypt.compare(password, this.password);
 };
 
 userSchema.methods.generateAccessToken = function () {

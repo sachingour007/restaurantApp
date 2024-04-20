@@ -76,7 +76,8 @@ const registerController = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, username, password } = req.body;
-    if (!email || !username) {
+
+    if (!(email || username)) {
       throw new ApiError(400, "username or email is required");
     }
 
@@ -87,8 +88,9 @@ const loginUser = async (req, res) => {
     if (!user) {
       throw new ApiError(404, "User does not exist");
     }
-
+    console.log(password, typeof password);
     const isPasswordValid = await user.isPasswordCorrect(password);
+    console.log(isPasswordValid);
 
     if (!isPasswordValid) {
       throw new ApiError(401, "Invalid user Credntials");
@@ -104,7 +106,6 @@ const loginUser = async (req, res) => {
       .select("-password -refreshToken");
 
     //tonken sent in Cookies
-
     //Option object help us to frontend can not change cookies.
     const options = {
       httpOnly: true,
@@ -134,16 +135,37 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = async () => {
-  try{
+  try {
+    User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: {
+          refreshToken: undefined,
+        },
+      },
+      {
+        new: true,
+      }
+    );
 
-  }catch(error){
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    return res
+      .status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json(new ApiResponse(200, {}, "User Logged Out"));
+  } catch (error) {
     return res
       .status(error.statusCode || 500)
       .json({ message: error.message, error });
   }
-}
+};
 
-module.exports = { registerController, loginUser };
+module.exports = { registerController, loginUser, logoutUser };
 
 /**
 User Register Steps :
