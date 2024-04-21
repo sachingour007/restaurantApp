@@ -4,7 +4,7 @@ const {
   registerController,
   loginUser,
   logoutUser,
-} = require("../controllers/user.controller");
+} = require("../controllers/user.controller.js");
 const { verifyJWT } = require("../middlewares/auth.middleware");
 
 router.route("/register").post(registerController);

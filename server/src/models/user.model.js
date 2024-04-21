@@ -1,6 +1,6 @@
 const { Schema, default: mongoose } = require("mongoose");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new Schema(
   {
@@ -49,21 +49,33 @@ const userSchema = new Schema(
   }
 );
 
-/**We bcrypt the password by bcryp and mongoose Pre hook method */
+// /**We bcrypt the password by bcrypJS and mongoose Pre hook method */
+
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next(); //we check when password change then run the function
+  // console.log(this);
+  const user = this;
+  //we check only when password change then run the function
+  if (!user.isModified("password")) {
+    return next();
+  }
   try {
     const saltRound = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(this.password, saltRound);
-    this.password = hashPassword;
+    const hash_password = await bcrypt.hash(user.password, saltRound);
+    user.password = hash_password;
   } catch (error) {
     next(error);
   }
 });
 
-userSchema.methods.isPasswordCorrect = async function (password) {
-  console.log("Modal file", password, this, typeof this.password);
-  return bcrypt.compare(password, this.password);
+userSchema.methods.comparePassword = async function (password) {
+  console.log("Decrypted Password:", password);
+  console.log("Stored Hashed Password:", this.password);
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    console.error("Password Comparison Error:", error);
+    throw error; // Re-throwing the error to handle it in the controller
+  }
 };
 
 userSchema.methods.generateAccessToken = function () {

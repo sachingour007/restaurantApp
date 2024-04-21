@@ -75,7 +75,9 @@ const registerController = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    console.log("Request Body:", req.body);
     const { email, username, password } = req.body;
+    console.log("login Function ", password);
 
     if (!(email || username)) {
       throw new ApiError(400, "username or email is required");
@@ -84,13 +86,14 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({
       $or: [{ email }, { username }],
     });
+    console.log("User Object:", user);
 
     if (!user) {
       throw new ApiError(404, "User does not exist");
     }
-    console.log(password, typeof password);
-    const isPasswordValid = await user.isPasswordCorrect(password);
-    console.log(isPasswordValid);
+
+    const isPasswordValid = await user.comparePassword(password);
+    console.log("Is Password Valid:", isPasswordValid);
 
     if (!isPasswordValid) {
       throw new ApiError(401, "Invalid user Credntials");
@@ -101,7 +104,7 @@ const loginUser = async (req, res) => {
     );
 
     // user = { ...user, refreshToken }; // we update the user with new value of refreshToken
-    const loggedInUser = user
+    const loggedInUser = await User
       .findOne(user._id)
       .select("-password -refreshToken");
 
