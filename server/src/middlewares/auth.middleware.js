@@ -26,7 +26,10 @@ const verifyJWT = async (req, _, next) => {
 
     next();
   } catch (error) {
-    throw new ApiError(401, error?.message || "Invalid access token");
+    // throw new ApiError(401, error?.message || "Invalid access token");
+    return res
+      .status(error.statusCode || 401)
+      .json({ message: error.message || "Invalid access token", error });
   }
 };
 

@@ -75,7 +75,7 @@ const registerController = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
+    console.log("Request Object:", req);
     const { email, username, password } = req.body;
     console.log("login Function ", password);
 
@@ -104,9 +104,9 @@ const loginUser = async (req, res) => {
     );
 
     // user = { ...user, refreshToken }; // we update the user with new value of refreshToken
-    const loggedInUser = await User
-      .findOne(user._id)
-      .select("-password -refreshToken");
+    const loggedInUser = await User.findOne(user._id).select(
+      "-password -refreshToken"
+    );
 
     //tonken sent in Cookies
     //Option object help us to frontend can not change cookies.
@@ -137,9 +137,9 @@ const loginUser = async (req, res) => {
   }
 };
 
-const logoutUser = async () => {
+const logoutUser = async (req, res) => {
   try {
-    User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.user._id,
       {
         $set: {
