@@ -1,11 +1,13 @@
 import react from "react";
 import "./scss/main.scss";
+import { Header } from "./components/index.js";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <h2>APP</h2>
-    </div>
+    <BrowserRouter>
+      <Header />
+    </BrowserRouter>
   );
 }
 
