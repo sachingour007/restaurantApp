@@ -1,64 +1,60 @@
 import React from "react";
-import heroBg from "../assets/images/hero-bg.jpg";
-import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
-import BannerSlider from "./SliderComponant/BannerSlider";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faCartShopping,
+  faX,
+  faBarsStaggered,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const navigate = useNavigate();
   return (
-    <section className="heroSection">
-      <div className="bg-box">
-        <img src={heroBg} alt="heroImage" />
+    <header>
+      <div className="logoName">
+        <NavLink to={"/"}>
+          <span>Hot Cornor</span>
+        </NavLink>
       </div>
-      <header>
-        <Navbar />
-      </header>
-      <div className="sliderContainer">
-       
-        <BannerSlider>
-          <div className="contentContainer">
-            <h1>Fast Food Restaurant</h1>
-            <p>
-              Doloremque, itaque aperiam facilis rerum, commodi, temporibus
-              sapiente ad mollitia laborum quam quisquam esse error unde.
-              Tempora ex doloremque, labore, sunt repellat dolore, iste magni
-              quos nihil ducimus libero ipsam.
-            </p>
-            <div className="btn-box">
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Order Now
-              </button>
-            </div>
-          </div>
-        </BannerSlider>
-        {/* <BannerSlider>
-          <div className="contentContainer">
-            <h1>Fast Food Restaurant</h1>
-            <p>
-              Doloremque, itaque aperiam facilis rerum, commodi, temporibus
-              sapiente ad mollitia laborum quam quisquam esse error unde.
-              Tempora ex doloremque, labore, sunt repellat dolore, iste magni
-              quos nihil ducimus libero ipsam.
-            </p>
-            <div className="btn-box">
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Order Now
-              </button>
-            </div>
-          </div>
-        </BannerSlider> */}
-       
+      <div className="navbar-link">
+        <ul>
+          <NavLink>
+            <li>Home</li>
+          </NavLink>
+          <NavLink>
+            <li>Menu</li>
+          </NavLink>
+          <NavLink>
+            <li>About</li>
+          </NavLink>
+          <NavLink>
+            <li>Book Table</li>
+          </NavLink>
+        </ul>
       </div>
-    </section>
+      <div className="user-items">
+        <ul>
+          <NavLink>
+            <li className="user-icon">
+              <FontAwesomeIcon icon={faUser} />
+            </li>
+          </NavLink>
+          <NavLink>
+            <li className="cart-icon">
+              <FontAwesomeIcon icon={faCartShopping} />
+            </li>
+          </NavLink>
+          <NavLink>
+            <li className="order-online">Order Online</li>
+          </NavLink>
+        </ul>
+      </div>
+
+      <div>
+        <FontAwesomeIcon icon={faX} />
+        <FontAwesomeIcon icon={faBarsStaggered} />
+      </div>
+    </header>
   );
 };
 
