@@ -1,6 +1,6 @@
 import react from "react";
 import "./scss/main.scss";
-import { Homepage, Header, OffeCard } from "./components/index.js";
+import { Homepage, Header, OffeCard, Menu } from "./components/index.js";
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Header />
       <Homepage />
       <OffeCard />
+      <Menu />
     </BrowserRouter>
   );
 }

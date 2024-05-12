@@ -28,4 +28,29 @@
         }
     }
     @media all and (max-width: 1280px) { margin-bottom: 100px;}
+    @media all and (max-width: 1024px) { margin-bottom: 100px;
+        .offerWrapper{
+            .offerCardContainer{padding: 0px;}
+        }}
+    @media all and (max-width: 820px) { margin-bottom: 100px;
+        .offerWrapper{
+            .offerCardContainer{
+                .card{
+                    .imgBox{width: 130px; height: 130px;}
+                    .contentBox{
+                        button{padding: 10px 20px;}
+                    }
+                }
+            }
+        }
+    }
+    @media all and (max-width: 720px) {
+        .offerWrapper{
+            .offerCardContainer{ flex-flow: column;
+                .card{width: 100%;
+                    .imgBox{width: 140px; height: 140px;}
+                }
+            }
+        }
+    }
 }
