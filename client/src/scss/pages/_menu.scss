@@ -1,0 +1,16 @@
+.menuSection{margin-bottom: 200px;
+    .menuWrapper{@include wrapper;
+        .secHeading{display: flex; justify-content: center; align-items: center; margin-bottom: 45px;
+            h2{@include font40; font-family: $dancingFont; font-weight: $fontW700; color: #000;}
+        }
+        .contentContainer{
+            .menuCardContainer{
+                .tabsList{margin-bottom: 20px;
+                    ul{display: flex; align-items: center; justify-content: center; gap: 20px;
+                        li{}
+                    }
+                }
+            }
+        }
+    }
+}
