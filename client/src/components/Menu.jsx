@@ -1,11 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { menuData } from "../constantFiles/menuContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import f1 from "../assets/images/f1.png";
+import MenuCards from "./MenuCards";
 
 const Menu = () => {
   const [foodItems, setFoodItems] = useState(menuData);
+  const [category, setCategory] = useState([]);
+  const [foodFilter, setFoodFilter] = useState("all");
+  const [filterFoodItems, setFilterFoodItems] = useState(menuData);
+
+  const getFoodItems = (cat) => {
+    if (cat === "all") {
+      setFilterFoodItems(menuData);
+    } else {
+      const foods = menuData.filter((el) => el.category === cat);
+      setFilterFoodItems(foods);
+    }
+
+    setFoodFilter(cat);
+  };
+
+  const foodHandler = (cat) => {
+    getFoodItems(cat);
+  };
+
+  //category Filter Function
+  const getUniqueCategory = (item) => {
+    const allCategory = item.map((el) => el.category);
+    const alluniqueCategory = [...new Set(allCategory)];
+    setCategory(alluniqueCategory);
+  };
+
+  useEffect(() => {
+    getUniqueCategory(foodItems);
+  }, [foodItems]);
+
   return (
     <section className="menuSection">
       <div className="menuWrapper">
@@ -16,31 +47,23 @@ const Menu = () => {
           <div className="menuCardContainer">
             <div className="tabsList">
               <ul>
-                <li>All</li>
-                <li>Pizza</li>
-                <li>Burger</li>
-                <li>Pasta</li>
-                <li>Fries</li>
+                <li onClick={() => foodHandler("all")}  className={foodFilter === 'all' ? "activeTab" : ""}>All</li>
+                {category.map((cat) => (
+                  <li
+                    onClick={() => foodHandler(cat)}
+                    key={cat}
+                    className={foodFilter === cat ? "activeTab" : ""}
+                  >
+                    {cat}
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="tabContent">
               <div className="allCards">
-                <div className="card">
-                  <div className="imgBox">
-                    <img src={f1} alt="" />
-                  </div>
-                  <div className="contentBox">
-                    <h4>Delicious Pizza</h4>
-                    <p>
-                      Veniam debitis quaerat officiis quasi cupiditate quo,
-                      quisquam velit, magnam voluptatem repellendus sed eaque
-                    </p>
-                    <div className="priceBox">
-                      <p>$20</p>
-                      <FontAwesomeIcon icon={faCartShopping} />
-                    </div>
-                  </div>
-                </div>
+                {filterFoodItems.map((items) => {
+                  return <MenuCards key={items.id} {...items} />;
+                })}
               </div>
             </div>
           </div>
