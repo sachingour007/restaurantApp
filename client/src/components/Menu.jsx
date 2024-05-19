@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { menuData } from "../constantFiles/menuContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import f1 from "../assets/images/f1.png";
 import MenuCards from "./MenuCards";
 
-const Menu = () => {
-  const [foodItems, setFoodItems] = useState(menuData);
+const Menu = ({ cards, showTab }) => {
+  const [foodItems, setFoodItems] = useState(cards);
   const [category, setCategory] = useState([]);
   const [foodFilter, setFoodFilter] = useState("all");
-  const [filterFoodItems, setFilterFoodItems] = useState(menuData);
+  const [filterFoodItems, setFilterFoodItems] = useState(cards);
 
   const getFoodItems = (cat) => {
     if (cat === "all") {
-      setFilterFoodItems(menuData);
+      setFilterFoodItems(cards);
     } else {
-      const foods = menuData.filter((el) => el.category === cat);
+      const foods = cards.filter((el) => el.category === cat);
       setFilterFoodItems(foods);
     }
 
@@ -45,20 +44,27 @@ const Menu = () => {
         </div>
         <div className="contentContainer">
           <div className="menuCardContainer">
-            <div className="tabsList">
-              <ul>
-                <li onClick={() => foodHandler("all")}  className={foodFilter === 'all' ? "activeTab" : ""}>All</li>
-                {category.map((cat) => (
+            {showTab && (
+              <div className="tabsList">
+                <ul>
                   <li
-                    onClick={() => foodHandler(cat)}
-                    key={cat}
-                    className={foodFilter === cat ? "activeTab" : ""}
+                    onClick={() => foodHandler("all")}
+                    className={foodFilter === "all" ? "activeTab" : ""}
                   >
-                    {cat}
+                    All
                   </li>
-                ))}
-              </ul>
-            </div>
+                  {category.map((cat) => (
+                    <li
+                      onClick={() => foodHandler(cat)}
+                      key={cat}
+                      className={foodFilter === cat ? "activeTab" : ""}
+                    >
+                      {cat}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="tabContent">
               <div className="allCards">
                 {filterFoodItems.map((items) => {
@@ -67,9 +73,13 @@ const Menu = () => {
               </div>
             </div>
           </div>
-          <div className="viewMore">
-            <button>View More</button>
-          </div>
+          {!showTab ? (
+            <div className="viewMore">
+              <button>View More</button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </section>

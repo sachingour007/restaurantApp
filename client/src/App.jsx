@@ -1,15 +1,20 @@
 import react from "react";
 import "./scss/main.scss";
 import { Homepage, Header, OffeCard, Menu } from "./components/index.js";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { menuData } from "../src/constantFiles/menuContent.js";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Homepage />
-      <OffeCard />
-      <Menu />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route
+          path="/menu"
+          element={<Menu cards={menuData} showTab={true} />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
