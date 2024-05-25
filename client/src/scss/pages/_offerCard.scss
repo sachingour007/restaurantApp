@@ -1,4 +1,4 @@
-.offerSection{margin-bottom: 200px;
+.offerSection{padding-top: 200px;
     .offerWrapper{@include wrapper;
         .offerCardContainer{ padding: 0 100px;display: flex; gap:20px; justify-content: center; align-items: center;
             .card{background: #222831;display: flex; flex-flow: wrap; align-items: center; gap: 20px;padding: 20px 15px; width: calc(50% - 10px); border-radius: 5px;  transition: all 0.8s ease-in-out;
@@ -16,9 +16,9 @@
             }
         }
     }
-    @media all and (max-width: 1800px) { margin-bottom: 180px;}
-    @media all and (max-width: 1600px) { margin-bottom: 140px;}
-    @media all and (max-width: 1440px) { margin-bottom: 120px;
+    @media all and (max-width: 1800px) { padding-top: 180px;}
+    @media all and (max-width: 1600px) { padding-top: 140px;}
+    @media all and (max-width: 1440px) { padding-top: 120px;
         .offerWrapper{
             .offerCardContainer{
                 .card{
@@ -27,12 +27,12 @@
             }
         }
     }
-    @media all and (max-width: 1280px) { margin-bottom: 100px;}
-    @media all and (max-width: 1024px) { margin-bottom: 100px;
+    @media all and (max-width: 1280px) { padding-top: 100px;}
+    @media all and (max-width: 1024px) { 
         .offerWrapper{
             .offerCardContainer{padding: 0px;}
         }}
-    @media all and (max-width: 820px) { margin-bottom: 100px;
+    @media all and (max-width: 820px) { 
         .offerWrapper{
             .offerCardContainer{
                 .card{

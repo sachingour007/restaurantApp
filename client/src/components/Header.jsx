@@ -46,7 +46,7 @@ const Header = () => {
             </li>
           </NavLink>
           <NavLink>
-            <li className="order-online">Order Online</li>
+            <li className="order-online">Cart</li>
           </NavLink>
         </ul>
       </div>
@@ -94,7 +94,7 @@ const Header = () => {
                 </li>
               </NavLink>
               <NavLink>
-                <li className="order-online">Order Online</li>
+                <li className="order-online">Cart</li>
               </NavLink>
             </ul>
           </div>

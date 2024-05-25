@@ -1,0 +1,40 @@
+footer{@include wrapper;margin-top: 200px; padding-top: 50px; padding-bottom: 50px; background: #222831;
+    .flexSec{ display: flex; justify-content: space-between; flex-flow: wrap;
+        .contactUs{
+            h2{@include font30; color: #fff; font-family: $dancingFont; font-weight: $fontW600; margin-bottom: 20px;}
+            .contactLinks{display: flex; flex-flow: column; gap: 15px;
+                a{color: #fff; @include font16;
+                    svg{margin-right: 10px;
+                        path{fill: #fff}
+                    }
+                    &:hover{color: #ffbe33;
+                        svg{
+                            path{fill: #ffbe33}
+                        }
+                    }
+                }
+            }
+        }
+        .socialLinks{
+            h2{@include font30; color: #fff; font-family: $dancingFont; font-weight: $fontW600; margin-bottom: 20px;}
+            .socialIcons{display: flex; gap: 10px;
+                a{width: 35px; height: 35px; background: #fff; border-radius: 100%; display: flex; align-items: center; justify-content: center;
+                    svg{@include font18;}
+                    &:hover{background: #ffbe33;
+                        svg{path{fill: #fff;}}
+                    }
+                }
+
+            }
+        }
+        .openinnHours{
+            h2{@include font30; color: #fff; font-family: $dancingFont; font-weight: $fontW600; margin-bottom: 20px;}
+            .openingDetails{
+                p{color: #fff; @include font16; font-weight: $fontW400; font-family: $openSans; margin-bottom: 15px;}
+            }
+        }
+    }
+    .copyrightContainer{display: flex; justify-content:center; flex-flow: wrap;
+        p{color: #fff; @include font16; font-weight: $fontW400; font-family: $openSans;}
+    }  
+}

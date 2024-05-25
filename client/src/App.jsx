@@ -1,6 +1,6 @@
 import react from "react";
 import "./scss/main.scss";
-import { Homepage, Header, OffeCard, Menu } from "./components/index.js";
+import { Homepage, Header, Menu, Footer } from "./components/index.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { menuData } from "../src/constantFiles/menuContent.js";
 
@@ -15,6 +15,7 @@ function App() {
           element={<Menu cards={menuData} showTab={true} />}
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

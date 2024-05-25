@@ -1,4 +1,4 @@
-.heroSection{position: relative;margin-bottom: 200px;height: 100vh;
+.heroSection{position: relative;height: 100vh;
     .heroWrapper{@include wrapper; height: 100%;
         .bg-box{position: absolute; top: 0;left: 0; width: 100%; height: 100%;
             img{width: 100%; height: 100%; object-fit: cover;}
@@ -28,8 +28,8 @@
             }
         }
     }
-    @media all and (max-width: 1800px){margin-bottom: 180px;}
-    @media all and (max-width: 1600px){margin-bottom: 140px;
+    @media all and (max-width: 1800px){}
+    @media all and (max-width: 1600px){
         .heroWrapper{
             .sliderhead{
                 .sliderContainer{padding: 40px 0 70px 0;
@@ -38,7 +38,7 @@
             }
         }
     }
-    @media all and (max-width: 1440px){margin-bottom: 120px;
+    @media all and (max-width: 1440px){
         .heroWrapper{
             .sliderhead{top: 250px;
                 .sliderContainer{
@@ -49,7 +49,7 @@
             }
         }
     }
-    @media all and (max-width: 1280px){margin-bottom: 100px;
+    @media all and (max-width: 1280px){
         .heroWrapper{
             .sliderhead{top: 180px;
                 .sliderContainer{padding: 40px 0 60px 0;

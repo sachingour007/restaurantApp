@@ -7,14 +7,14 @@ const offers = [
     offerName: "Tasty Thursdays",
     percentage: "20% off",
     img: cardOne,
-    order: "Order Now",
+    order: "Add Cart",
   },
   {
     id: "2",
     offerName: "Pizza Day",
     percentage: "15% off",
     img: cardTwo,
-    order: "Order Now",
+    order: "Add Cart",
   },
 ];
 
