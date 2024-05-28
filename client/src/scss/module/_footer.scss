@@ -36,5 +36,26 @@ footer{@include wrapper;margin-top: 200px; padding-top: 50px; padding-bottom: 50
     }
     .copyrightContainer{display: flex; justify-content:center; flex-flow: wrap;
         p{color: #fff; @include font16; font-weight: $fontW400; font-family: $openSans;}
-    }  
+    }
+
+    @media all and (max-width: 1800px){margin-top: 180px;}
+    @media all and (max-width: 1600px){margin-top: 140px;}
+    @media all and (max-width: 1440px){margin-top: 120px;}
+    @media all and (max-width: 1280px){margin-top: 100px;}
+    @media all and (max-width: 720px){
+        .flexSec{flex-flow: column; gap: 20px; align-items: center;margin-bottom: 20px;
+            .contactUs{width: 100%;
+                h2{font-size: 28px; text-align: center;}
+            }
+            .socialLinks{width: 100%;
+                h2{font-size: 28px; text-align: center;}
+                .socialIcons{justify-content: space-evenly;
+                    a{width: 30px; height: 30px;}
+                }
+            }
+            .openinnHours{width: 100%;
+                h2{font-size: 28px; text-align: center;}
+            }
+        }
+    }
 }

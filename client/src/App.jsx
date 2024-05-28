@@ -1,12 +1,20 @@
 import react from "react";
 import "./scss/main.scss";
-import { Homepage, Header, Menu, Footer } from "./components/index.js";
+import {
+  Homepage,
+  Header,
+  Menu,
+  Footer,
+  ScrollTop,
+  Login,
+} from "./components/index.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { menuData } from "../src/constantFiles/menuContent.js";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -14,6 +22,7 @@ function App() {
           path="/menu"
           element={<Menu cards={menuData} showTab={true} />}
         />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import f1 from "../assets/images/f1.png";
 import MenuCards from "./MenuCards";
+import { Link } from "react-router-dom";
 
 const Menu = ({ cards, showTab }) => {
   const [foodItems, setFoodItems] = useState(cards);
@@ -75,7 +76,7 @@ const Menu = ({ cards, showTab }) => {
           </div>
           {!showTab ? (
             <div className="viewMore">
-              <button>View More</button>
+              <Link to={"/menu"}>View More</Link>
             </div>
           ) : (
             ""

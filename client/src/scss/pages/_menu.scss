@@ -38,9 +38,9 @@
                 }
             }
             .viewMore{margin-top: 45px; display: flex; align-items: center; justify-content: center;
-                button{padding: 10px 55px; background-color: #ffbe33; color: #fff; border-radius: 45px;border: none; cursor: pointer;}
+                a{padding: 10px 55px; background-color: #ffbe33; color: #fff; border-radius: 45px;border: none; cursor: pointer;}
                 &:hover{
-                    button{background: #e69c00;}
+                    a{background: #e69c00;}
                 }
             }
         }

@@ -4,9 +4,7 @@ import Navbar from "./Header";
 import { useNavigate } from "react-router-dom";
 import BannerSlider from "./SliderComponant/BannerSlider";
 import OfferCard from "./OfferCard";
-
 import { menuData } from "../constantFiles/menuContent";
-
 import Menu from "./Menu";
 
 const Homepage = () => {
