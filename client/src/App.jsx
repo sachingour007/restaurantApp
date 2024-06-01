@@ -7,6 +7,7 @@ import {
   Footer,
   ScrollTop,
   Login,
+  Register,
 } from "./components/index.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { menuData } from "../src/constantFiles/menuContent.js";
@@ -23,6 +24,7 @@ function App() {
           element={<Menu cards={menuData} showTab={true} />}
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -11,7 +11,7 @@ const Login = () => {
         </div>
         <div className="formContainer">
           <h2>
-            Welcome to <span>HotCorner !!</span>
+            Log In <span>HotCorner !!</span>
           </h2>
           <form action="">
             <input
@@ -31,7 +31,7 @@ const Login = () => {
             <input type="submit" value="Login" />
           </form>
           <div className="signUpNote">
-          <p>Alreay Have An Account? <Link>Sign Up</Link></p>
+          <p>Don't Have An Account? <Link to={"/register"}>Sign Up</Link></p>
         </div>
         </div>
         

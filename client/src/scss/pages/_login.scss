@@ -9,12 +9,12 @@
             }
             form{display: flex; flex-flow: column;  justify-content: center; align-items:center; gap: 20px;width: 100%;
                 input{padding: 18px 24px; width: 80%;@include font20; font-family: $openSans; color: #000; 
-                 &::placeholder{@include font20; font-family: $openSans; color: #000;}
+                 &::placeholder{@include font20; font-family: $openSans; color: #6e6f71;}
                 }
-                input[type="submit"]{display: inline-block; background: #ffbe33; width: 25%; margin-top: 50px; color: #fff; @include font24; font-weight: $fontW700; cursor: pointer;}
+                input[type="submit"]{display: inline-block; background: #ffbe33; width: 22%; margin-top: 50px; color: #fff; @include font24; font-weight: $fontW700; cursor: pointer; padding: 12px 24px;}
             }
             .signUpNote{
-                p{@include font18; font-weight: $fontW500; font-family: $openSans;}
+                p{@include font18; font-weight: $fontW500; font-family: $openSans; color: #6e6f71;}
                 a{color: #ffbe33; @include font22; font-weight: $fontW700; letter-spacing: 0.6px; font-family: $openSans;}
             }
         }
