@@ -1,7 +1,11 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const cockieParser = require("cookie-parser");
+
+console.log(process.env.CORS_ORIGIN);
+
 
 app.use(
   cors({

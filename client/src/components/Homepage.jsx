@@ -10,7 +10,6 @@ import Menu from "./Menu";
 const Homepage = () => {
   const navigate = useNavigate();
   const limitedCards = menuData.slice(0, 3);
-  console.log(limitedCards);
   return (
     <>
       <section className="heroSection">
@@ -89,7 +88,7 @@ const Homepage = () => {
         </div>
       </section>
       <OfferCard />
-      <Menu cards={limitedCards} showTab={false}/>
+      <Menu cards={limitedCards} showTab={false} />
     </>
   );
 };

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import login_banner from "../assets/images/login_banner.png";
 import { Link } from "react-router-dom";
-const apiUrl = import.meta.env.VITE_APP_API_URL;
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [resigterData, setRegisterData] = useState({
-    fullname: "",
+    fullName: "",
     username: "",
     email: "",
     password: "",
     phone: "",
   });
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const formhandler = (e) => {
     setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
@@ -30,12 +32,13 @@ const Register = () => {
 
       if (response.ok) {
         setRegisterData({
-          fullname: "",
+          fullName: "",
           username: "",
           email: "",
           password: "",
           phone: "",
         });
+        navigate("/");
       }
     } catch (error) {
       console.log("resiter page", error);
@@ -60,10 +63,10 @@ const Register = () => {
           <form action="">
             <input
               type="text"
-              name="fullname"
-              id="fullname"
-              placeholder="Enter FullName..."
-              value={resigterData.fullname}
+              name="fullName"
+              id="fullName"
+              placeholder="Enter fullName..."
+              value={resigterData.fullName}
               required
               onChange={formhandler}
             />
