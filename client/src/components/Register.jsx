@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import login_banner from "../assets/images/login_banner.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../store/authSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { isAuthenticate } = useSelector((store) => store.auth);
+
   const navigate = useNavigate();
   const [resigterData, setRegisterData] = useState({
     fullName: "",
@@ -12,42 +17,48 @@ const Register = () => {
     password: "",
     phone: "",
   });
-  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  // const apiUrl = import.meta.env.VITE_APP_API_URL;
+
+  useEffect(() => {
+    if (isAuthenticate) {
+      navigate("/login");
+    }
+  }, [isAuthenticate]);
 
   const formhandler = (e) => {
     setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
   };
 
-  const registerUser = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(resigterData),
-      });
-      const retrn_response = await response.json();
-      console.log(retrn_response);
+  // const registerUser = async () => {
+  //   try {
+  //     const response = await fetch(`${apiUrl}/auth/register`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(resigterData),
+  //     });
+  //     const retrn_response = await response.json();
+  //     console.log(retrn_response);
 
-      if (response.ok) {
-        setRegisterData({
-          fullName: "",
-          username: "",
-          email: "",
-          password: "",
-          phone: "",
-        });
-        navigate("/");
-      }
-    } catch (error) {
-      console.log("resiter page", error);
-    }
-  };
+  //     if (response.ok) {
+
+  //     }
+  //   } catch (error) {
+  //     console.log("resiter page", error);
+  //   }
+  // };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    registerUser();
+    dispatch(registerUser(resigterData));
+    setRegisterData({
+      fullName: "",
+      username: "",
+      email: "",
+      password: "",
+      phone: "",
+    });
   };
 
   return (

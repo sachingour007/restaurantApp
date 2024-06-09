@@ -7,9 +7,16 @@ import {
   faX,
   faBarsStaggered,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [navVisible, setNavVisible] = useState(false);
+  const { isAuthenticate } = useSelector((store) => store.auth);
+
+  const userDetails = localStorage.getItem("userDetailes");
+  const user = JSON.parse(userDetails);
+  console.log(user);
+
   return (
     <header>
       <div className="logoName">
@@ -40,11 +47,8 @@ const Header = () => {
               <FontAwesomeIcon icon={faUser} />
             </li>
           </NavLink>
-          <NavLink>
-            <li className="cart-icon">
-              <FontAwesomeIcon icon={faCartShopping} />
-            </li>
-          </NavLink>
+          {user ? <li className="cart-icon">{user?.fullName}</li> : ""}
+
           <NavLink>
             <li className="order-online">Cart</li>
           </NavLink>

@@ -75,7 +75,6 @@ const registerController = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    console.log("Request Object:", req);
     const { email, username, password } = req.body;
     console.log("login Function ", password);
 
@@ -83,28 +82,28 @@ const loginUser = async (req, res) => {
       throw new ApiError(400, "username or email is required");
     }
 
-    const user = await User.findOne({
+    const userCopy = await User.findOne({
       $or: [{ email }, { username }],
     });
-    console.log("User Object:", user);
+    console.log("User Object:", userCopy);
 
-    if (!user) {
+    if (!userCopy) {
       throw new ApiError(404, "User does not exist");
     }
 
-    const isPasswordValid = await user.comparePassword(password);
+    const isPasswordValid = await userCopy.isPasswordCorrect(password);
     console.log("Is Password Valid:", isPasswordValid);
 
     if (!isPasswordValid) {
-      throw new ApiError(401, "Invalid user Credntials");
+      throw new ApiError(401, "Invalid user credentials")
     }
 
     const { accesToken, refreshToken } = await generateAccessAndRefreshToken(
-      user._id
+      userCopy._id
     );
 
     // user = { ...user, refreshToken }; // we update the user with new value of refreshToken
-    const loggedInUser = await User.findOne(user._id).select(
+    const loggedInUser = await User.findOne(userCopy._id).select(
       "-password -refreshToken"
     );
 
@@ -123,7 +122,7 @@ const loginUser = async (req, res) => {
         new ApiResponse(
           200,
           {
-            user: loggedInUser,
+            userCopy: loggedInUser,
             accesToken,
             refreshToken,
           },
@@ -131,6 +130,7 @@ const loginUser = async (req, res) => {
         )
       );
   } catch (error) {
+    console.log(error);
     return res
       .status(error.statusCode || 500)
       .json({ message: error.message, error });
