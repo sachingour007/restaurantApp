@@ -58,6 +58,34 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        credentials: "include",
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        return rejectWithValue(data.message || "Failed to logout");
+      }
+
+      const data = await response.json();
+      console.log("logout user Data", data);
+      localStorage.removeItem("userDetailes");
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -75,6 +103,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.isAuthenticate = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -92,6 +121,19 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Something went wrong";
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.isAuthenticate = false; //User is Logout
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

@@ -6,7 +6,6 @@ const cockieParser = require("cookie-parser");
 
 console.log(process.env.CORS_ORIGIN);
 
-
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,

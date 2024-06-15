@@ -1,21 +1,34 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faCartShopping,
   faX,
   faBarsStaggered,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../store/authSlice";
 
 const Header = () => {
   const [navVisible, setNavVisible] = useState(false);
   const { isAuthenticate } = useSelector((store) => store.auth);
-
+  console.log("isAuthenticate", isAuthenticate);
+  const dispatch = useDispatch();
   const userDetails = localStorage.getItem("userDetailes");
   const user = JSON.parse(userDetails);
-  console.log(user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticate) {
+      navigate("/login");
+    }
+  }, [isAuthenticate]);
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <header>
@@ -42,11 +55,20 @@ const Header = () => {
       </div>
       <div className="user-items">
         <ul>
-          <NavLink to={"/login"}>
-            <li className="user-icon">
-              <FontAwesomeIcon icon={faUser} />
-            </li>
-          </NavLink>
+          {user ? (
+            <NavLink>
+              <li className="user-icon" onClick={logoutHandler}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </li>
+            </NavLink>
+          ) : (
+            <NavLink to={"/login"}>
+              <li className="user-icon">
+                <FontAwesomeIcon icon={faUser} />
+              </li>
+            </NavLink>
+          )}
+
           {user ? <li className="cart-icon">{user?.fullName}</li> : ""}
 
           <NavLink>

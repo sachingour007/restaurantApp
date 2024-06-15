@@ -8,6 +8,7 @@ import { registerUser } from "../store/authSlice";
 const Register = () => {
   const dispatch = useDispatch();
   const { isAuthenticate } = useSelector((store) => store.auth);
+  console.log(isAuthenticate);
 
   const navigate = useNavigate();
   const [resigterData, setRegisterData] = useState({
@@ -17,7 +18,6 @@ const Register = () => {
     password: "",
     phone: "",
   });
-  // const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   useEffect(() => {
     if (isAuthenticate) {
@@ -29,36 +29,21 @@ const Register = () => {
     setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
   };
 
-  // const registerUser = async () => {
-  //   try {
-  //     const response = await fetch(`${apiUrl}/auth/register`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(resigterData),
-  //     });
-  //     const retrn_response = await response.json();
-  //     console.log(retrn_response);
-
-  //     if (response.ok) {
-
-  //     }
-  //   } catch (error) {
-  //     console.log("resiter page", error);
-  //   }
-  // };
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(registerUser(resigterData));
-    setRegisterData({
-      fullName: "",
-      username: "",
-      email: "",
-      password: "",
-      phone: "",
-    });
+    try {
+      await dispatch(registerUser(resigterData));
+      setRegisterData({
+        fullName: "",
+        username: "",
+        email: "",
+        password: "",
+        phone: "",
+      });
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (

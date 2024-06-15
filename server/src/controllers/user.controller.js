@@ -73,7 +73,7 @@ const registerController = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res) => { 
   try {
     const { email, username, password } = req.body;
     console.log("login Function ", password);

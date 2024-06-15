@@ -11,7 +11,7 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
     }
     .user-items{
         ul{display: flex; flex-flow: wrap; align-items: center; gap: 15px;
-            li{ @include font20;color: #fff; text-align: center; font-family: $openSans; font-weight: $fontW500
+            li{ @include font20;color: #fff; text-align: center; font-family: $openSans; font-weight: $fontW500;
                 
             }
             .user-icon{
