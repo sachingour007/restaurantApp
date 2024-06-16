@@ -15,23 +15,22 @@ const Login = () => {
     password: "",
   });
 
-  useEffect(() => {
-    if (isAuthenticate) {
-      navigate("/");
-    }
-  }, [isAuthenticate]);
-
   const loginHandler = (e) => {
     setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(loginFormData));
-    setLoginFormData({
-      email: "",
-      password: "",
-    });
+    try {
+      await dispatch(loginUser(loginFormData));
+      setLoginFormData({
+        email: "",
+        password: "",
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("login failed:", error);
+    }
   };
 
   return (

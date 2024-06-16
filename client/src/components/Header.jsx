@@ -13,21 +13,26 @@ import { logoutUser } from "../store/authSlice";
 
 const Header = () => {
   const [navVisible, setNavVisible] = useState(false);
-  const { isAuthenticate } = useSelector((store) => store.auth);
+  const { isAuthenticate, user } = useSelector((store) => store.auth);
   console.log("isAuthenticate", isAuthenticate);
+  console.log("user", user);
   const dispatch = useDispatch();
   const userDetails = localStorage.getItem("userDetailes");
-  const user = JSON.parse(userDetails);
+  const singleUser = JSON.parse(userDetails);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isAuthenticate) {
-      navigate("/login");
+  const logoutHandler = async () => {
+    try {
+      const result = await dispatch(logoutUser());
+      console.log("result", result);
+      if (result.payload.success) {
+        navigate("/login");
+      } else {
+        console.error("Logout failed", result.payload.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }, [isAuthenticate]);
-
-  const logoutHandler = () => {
-    dispatch(logoutUser());
   };
 
   return (
@@ -39,10 +44,10 @@ const Header = () => {
       </div>
       <div className="navbar-link">
         <ul>
-          <NavLink>
+          <NavLink to={"/"}>
             <li>Home</li>
           </NavLink>
-          <NavLink>
+          <NavLink to={"/menu"}>
             <li>Menu</li>
           </NavLink>
           <NavLink>
@@ -55,7 +60,7 @@ const Header = () => {
       </div>
       <div className="user-items">
         <ul>
-          {user ? (
+          {singleUser ? (
             <NavLink>
               <li className="user-icon" onClick={logoutHandler}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
@@ -69,7 +74,11 @@ const Header = () => {
             </NavLink>
           )}
 
-          {user ? <li className="cart-icon">{user?.fullName}</li> : ""}
+          {singleUser ? (
+            <li className="user-name">{singleUser?.fullName}</li>
+          ) : (
+            ""
+          )}
 
           <NavLink>
             <li className="order-online">Cart</li>

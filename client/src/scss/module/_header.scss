@@ -11,15 +11,14 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
     }
     .user-items{
         ul{display: flex; flex-flow: wrap; align-items: center; gap: 15px;
-            li{ @include font20;color: #fff; text-align: center; font-family: $openSans; font-weight: $fontW500;
-                
-            }
+            li{ @include font20;color: #fff; text-align: center; font-family: $openSans; font-weight: $fontW500;}
             .user-icon{
                 svg{
                     path{fill:#fff;height: 20px; width: 20px;}
                 }
                 &:hover{svg{path{fill: #e69c00;}}}
             }
+            .user-name{text-transform: capitalize; color: #e69c00; font-weight: $fontW600;}
             .cart-icon{ 
                 svg{
                     path{fill:#fff;height: 20px; width: 20px;}

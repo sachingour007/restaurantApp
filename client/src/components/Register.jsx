@@ -7,8 +7,8 @@ import { registerUser } from "../store/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAuthenticate } = useSelector((store) => store.auth);
-  console.log(isAuthenticate);
+  const { isAuthenticate, user } = useSelector((store) => store.auth);
+  console.log("User", user);
 
   const navigate = useNavigate();
   const [resigterData, setRegisterData] = useState({
@@ -19,31 +19,20 @@ const Register = () => {
     phone: "",
   });
 
-  useEffect(() => {
-    if (isAuthenticate) {
-      navigate("/login");
-    }
-  }, [isAuthenticate]);
-
   const formhandler = (e) => {
     setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      await dispatch(registerUser(resigterData));
-      setRegisterData({
-        fullName: "",
-        username: "",
-        email: "",
-        password: "",
-        phone: "",
-      });
-      navigate("/login");
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
+    dispatch(registerUser(resigterData));
+    setRegisterData({
+      fullName: "",
+      username: "",
+      email: "",
+      password: "",
+      phone: "",
+    });
   };
 
   return (

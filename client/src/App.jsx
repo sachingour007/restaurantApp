@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { menuData } from "../src/constantFiles/menuContent.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import UserPrivateRoute from "./components/Private-Route/UserPrivateRoute.js";
 
 function App() {
   return (
@@ -24,7 +25,11 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route
             path="/menu"
-            element={<Menu cards={menuData} showTab={true} />}
+            element={
+              <UserPrivateRoute>
+                <Menu cards={menuData} showTab={true} />
+              </UserPrivateRoute>
+            }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
