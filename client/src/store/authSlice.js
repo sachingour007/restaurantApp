@@ -24,6 +24,7 @@ export const registerUser = createAsyncThunk(
       console.log(retrn_response);
       return retrn_response;
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -107,7 +108,8 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Something went wrong";
+        state.error = action.payload;
+        // console.error("Rejected Error:", action.payload);
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -120,7 +122,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Something went wrong";
+        state.error = action.payload;
       })
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;

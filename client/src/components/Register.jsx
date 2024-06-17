@@ -7,8 +7,9 @@ import { registerUser } from "../store/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAuthenticate, user } = useSelector((store) => store.auth);
+  const { isAuthenticate, user, error } = useSelector((store) => store.auth);
   console.log("User", user);
+  console.log("error", error);
 
   const navigate = useNavigate();
   const [resigterData, setRegisterData] = useState({
@@ -23,8 +24,9 @@ const Register = () => {
     setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
+
     dispatch(registerUser(resigterData));
     setRegisterData({
       fullName: "",

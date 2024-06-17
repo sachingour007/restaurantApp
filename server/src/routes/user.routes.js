@@ -6,8 +6,10 @@ const {
   logoutUser,
 } = require("../controllers/user.controller.js");
 const { verifyJWT } = require("../middlewares/auth.middleware");
+const validate = require("../middlewares/form.middleware.js");
+const registerSchema = require("../vaildators/auth-vaildators.js");
 
-router.route("/register").post(registerController);
+router.route("/register").post(validate(registerSchema), registerController);
 router.route("/login").post(loginUser);
 
 //Secured Routes
