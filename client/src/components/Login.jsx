@@ -44,24 +44,28 @@ const Login = () => {
             Log In <span>HotCorner !!</span>
           </h2>
           <form action="" onSubmit={submitHandler}>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder=" Enter Email..."
-              value={loginFormData.email}
-              onChange={loginHandler}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter Password..."
-              value={loginFormData.password}
-              onChange={loginHandler}
-              required
-            />
+            <div className="inputContainer">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder=" Enter Email..."
+                value={loginFormData.email}
+                onChange={loginHandler}
+                required
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter Password..."
+                value={loginFormData.password}
+                onChange={loginHandler}
+                required
+              />
+            </div>
             <input type="submit" value="Login" />
           </form>
           <div className="signUpNote">

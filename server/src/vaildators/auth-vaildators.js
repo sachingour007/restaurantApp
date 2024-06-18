@@ -10,8 +10,8 @@ const registerSchema = z.object({
     .min(3, { message: "username must be at least of 3 chars." })
     .max(20, { message: "username must not be more than 20 chars" }),
   email: z
-    .string({ required_error: "email is required" })
-    .nonempty({ message: "username is required" })
+    .string({ required_error: "Email is required" })
+    .nonempty({ message: "Email is required" })
     .trim(),
   fullName: z
     .string({ required_error: "fullName is required" })

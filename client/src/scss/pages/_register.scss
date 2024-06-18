@@ -39,7 +39,9 @@
         .wrapper{
             .formContainer{gap: 12px;
                 form{gap: 10px;
-                    input{width: 90%; padding: 12px 18px;}
+                    .inputContainer{width: 90%;
+                        input{padding: 12px 18px;}
+                    }
                     input[type="submit"]{margin-top: 14px; width: 28%; padding: 8px 16px;}
                 }
             }
@@ -50,7 +52,9 @@
             .imgContainer{width: 100%;}
             .formContainer{gap: 35px; width: 100%; padding: 20px 0;
                 form{gap: 10px;
-                    input{width: 90%; padding: 14px 20px;}
+                    .inputContainer{
+                        input{padding: 14px 20px;}
+                    }
                     input[type="submit"]{margin-top: 20px; width: 20%; padding: 8px 16px;}
                 }
             }
