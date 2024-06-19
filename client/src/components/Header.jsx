@@ -14,8 +14,8 @@ import { logoutUser } from "../store/authSlice";
 const Header = () => {
   const [navVisible, setNavVisible] = useState(false);
   const { isAuthenticate, user } = useSelector((store) => store.auth);
-  console.log("isAuthenticate", isAuthenticate);
-  console.log("user", user);
+  // console.log("isAuthenticate", isAuthenticate);
+  // console.log("user", user);
   const dispatch = useDispatch();
   const userDetails = localStorage.getItem("userDetailes");
   const singleUser = JSON.parse(userDetails);
@@ -31,7 +31,7 @@ const Header = () => {
         console.error("Logout failed", result.payload.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

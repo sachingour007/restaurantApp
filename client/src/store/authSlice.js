@@ -18,6 +18,7 @@ export const registerUser = createAsyncThunk(
       // Check if response is not OK
       if (!response.ok) {
         const errorData = await response.json();
+        console.log(errorData);
         return rejectWithValue(errorData.message || "Failed to register");
       }
       const retrn_response = await response.json();
@@ -51,7 +52,7 @@ export const loginUser = createAsyncThunk(
       Cookies.set("accessToken", accesToken, { expires: 7, secure: true });
       Cookies.set("refreshToken", refreshToken, { expires: 7, secure: true });
       localStorage.setItem("userDetailes", JSON.stringify(userCopy));
-      console.log(Data.data);
+      console.log(Data);
       return Data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -90,10 +91,11 @@ export const logoutUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: [],
+    user: null,
     loading: false,
     error: null,
     isAuthenticate: false,
+    success: false,
   },
   extraReducers: (builder) => {
     builder
@@ -102,28 +104,35 @@ const authSlice = createSlice({
         state.error = null; // Reset error on new request
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticate = false;
+        state.success = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        // console.error("Rejected Error:", action.payload);
       })
+
+
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null; // Reset error on new request
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticate = true; // User is Authenticated
+        state.success = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
+
+
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -132,6 +141,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticate = false; //User is Logout
+        state.success = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;

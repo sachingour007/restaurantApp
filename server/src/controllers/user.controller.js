@@ -73,7 +73,7 @@ const registerController = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => { 
+const loginUser = async (req, res) => {
   try {
     const { email, username, password } = req.body;
     console.log("login Function ", password);
@@ -95,7 +95,7 @@ const loginUser = async (req, res) => {
     console.log("Is Password Valid:", isPasswordValid);
 
     if (!isPasswordValid) {
-      throw new ApiError(401, "Invalid user credentials")
+      throw new ApiError(401, "Invalid user credentials");
     }
 
     const { accesToken, refreshToken } = await generateAccessAndRefreshToken(

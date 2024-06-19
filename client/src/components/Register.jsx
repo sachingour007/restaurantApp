@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import login_banner from "../assets/images/login_banner.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -17,18 +17,17 @@ const initialValues = {
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAuthenticate, user, error } = useSelector((store) => store.auth);
+  const { success, user, error } = useSelector((store) => store.auth);
   console.log("User", user);
   console.log("error", error);
+  console.log("succes", success);
 
   const navigate = useNavigate();
-  // const [resigterData, setRegisterData] = useState({
-  //   fullName: "",
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   phone: "",
-  // });
+  useEffect(() => {
+    if (success) {
+      navigate("/login");
+    }
+  }, [success, navigate]);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -36,44 +35,9 @@ const Register = () => {
       validationSchema: registerSchema,
       onSubmit: (values, action) => {
         dispatch(registerUser(values));
-        console.log(values);
         action.resetForm();
-        navigate("/login");
       },
     });
-  console.log(errors);
-
-  // const formhandler = (e) => {
-  //   setRegisterData({ ...resigterData, [e.target.name]: e.target.value });
-  // };
-
-  // useEffect(() => {
-  //   if (error) {
-  //     alert(error);
-  //   }
-  // }, [error]);
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   const { username, fullName, email, password, phone } = resigterData;
-  //   if (username && fullName && email && password && phone) {
-  //     dispatch(registerUser(resigterData));
-  //     if (!error) {
-  //       setRegisterData({
-  //         fullName: "",
-  //         username: "",
-  //         email: "",
-  //         password: "",
-  //         phone: "",
-  //       });
-  //       navigate("/login");
-  //     }
-
-  //     console.log("true");
-  //   } else {
-  //     console.log("false values");
-  //   }
-  // };
 
   return (
     <section className="loginSection register">
