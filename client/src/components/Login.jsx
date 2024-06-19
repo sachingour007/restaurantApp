@@ -6,6 +6,7 @@ import { loginUser } from "../store/authSlice.js";
 import { Formik, useFormik } from "formik";
 import { loginSchema } from "../formSchema/index.js";
 
+
 const initialValues = {
   email: "",
   password: "",
@@ -16,10 +17,10 @@ const Login = () => {
   const { user, loading, isAuthenticate, error, success } = useSelector(
     (store) => store.auth
   );
-  console.log("isAuthenticate", isAuthenticate);
-  console.log("user", user);
-  console.log("error", error);
-  console.log("success", success);
+  // console.log("isAuthenticate", isAuthenticate);
+  // console.log("user", user);
+  // console.log("error", error);
+  // console.log("success", success);
 
   const navigate = useNavigate();
   useEffect(() => {

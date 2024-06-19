@@ -654,3 +654,17 @@ $fontW600 : 600;
 $fontW700 : 700;
 $fontW800 : 800;
 $fontW900 : 900;
+
+
+//Tostify Css
+
+  .toastBody {
+    font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+    color: #10171D; /* #10171D */
+    font-size: 16px !important;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .toastProgress {
+    background: #333F48 !important;
+  }

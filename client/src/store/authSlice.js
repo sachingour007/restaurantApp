@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { json } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_APP_API_URL;
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -18,9 +19,13 @@ export const registerUser = createAsyncThunk(
       // Check if response is not OK
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message)
         console.log(errorData);
         return rejectWithValue(errorData.message || "Failed to register");
+      }else{
+        toast.success("Register succesfully");
       }
+
       const retrn_response = await response.json();
       console.log(retrn_response);
       return retrn_response;
@@ -45,8 +50,12 @@ export const loginUser = createAsyncThunk(
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message)
         return rejectWithValue(errorData.message || "Failed to Login");
+      }else{
+        toast.success("login succesfully");
       }
+
       const Data = await response.json();
       const { accesToken, refreshToken, userCopy } = Data.data;
       Cookies.set("accessToken", accesToken, { expires: 7, secure: true });
@@ -73,11 +82,15 @@ export const logoutUser = createAsyncThunk(
       });
       if (!response.ok) {
         const data = await response.json();
+        toast.error(data.message)
         return rejectWithValue(data.message || "Failed to logout");
+      }else{
+        console.log();
       }
 
       const data = await response.json();
       console.log("logout user Data", data);
+      toast.success(data.message)
       localStorage.removeItem("userDetailes");
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
