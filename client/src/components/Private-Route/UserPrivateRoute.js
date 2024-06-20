@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const UserPrivateRoute = ({ children }) => {
   const navigate = useNavigate();
-  const { isAuthenticate } = useSelector((store) => store.auth);
-  console.log(isAuthenticate);
+  const userDetails = localStorage.getItem("userDetailes");
+  console.log(userDetails);
 
   useEffect(() => {
     // Redirect to login if not authenticated
-    if (!isAuthenticate) {
+    if (!userDetails) {
       navigate("/login");
     }
-  }, [isAuthenticate, navigate]);
+  }, [userDetails, navigate]);
 
-
-  return isAuthenticate ? children : null;
+  return userDetails ? children : null;
 };
 
 export default UserPrivateRoute;
