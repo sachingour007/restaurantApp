@@ -19,10 +19,10 @@ export const registerUser = createAsyncThunk(
       // Check if response is not OK
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(errorData.message)
+        toast.error(errorData.message);
         console.log(errorData);
         return rejectWithValue(errorData.message || "Failed to register");
-      }else{
+      } else {
         toast.success("Register succesfully");
       }
 
@@ -50,9 +50,9 @@ export const loginUser = createAsyncThunk(
 
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(errorData.message)
+        toast.error(errorData.message);
         return rejectWithValue(errorData.message || "Failed to Login");
-      }else{
+      } else {
         toast.success("login succesfully");
       }
 
@@ -80,17 +80,69 @@ export const logoutUser = createAsyncThunk(
         },
         credentials: "include",
       });
+
+      if (response.status === 401) {
+        //Try refresh Token
+        const refreshResponse = await fetch(`${apiUrl}/auth/refresh-token`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          credentials: "include",
+        });
+
+        if (refreshResponse.ok) {
+          const newTokenData = await refreshResponse.json();
+          console.log("new Token", newTokenData.accesToken);
+          Cookies.set("accessToken", newTokenData.accesToken, {
+            expires: 7,
+            secure: true,
+          });
+          Cookies.set("refreshToken", newTokenData.refreshToken, {
+            expires: 7,
+            secure: true,
+          });
+
+          //Logout Api
+          const response = await fetch(`${apiUrl}/auth/logout`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "Application/json",
+            },
+            credentials: "include",
+          });
+
+          if (!response.ok) {
+            const data = await response.json();
+            toast.error("Failed to logout");
+            return rejectWithValue(data.message || "Failed to logout");
+          }
+          const data = await response.json();
+          console.log("logout user Data", data);
+          toast.success(data.message);
+          localStorage.removeItem("userDetailes");
+          Cookies.remove("accessToken");
+          Cookies.remove("refreshToken");
+          return data;
+        } else {
+          console.log("new Token ", newTokenData);
+          toast.success(newTokenData.message);
+          localStorage.removeItem("userDetailes");
+          Cookies.remove("accessToken");
+          Cookies.remove("refreshToken");
+          return newTokenData;
+        }
+      }
+
       if (!response.ok) {
         const data = await response.json();
-        toast.error(data.message)
+        toast.error("Failed to logout");
         return rejectWithValue(data.message || "Failed to logout");
-      }else{
-        console.log();
       }
 
       const data = await response.json();
       console.log("logout user Data", data);
-      toast.success(data.message)
+      toast.success(data.message);
       localStorage.removeItem("userDetailes");
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
@@ -128,7 +180,6 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null; // Reset error on new request
@@ -144,7 +195,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
 
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;

@@ -2,7 +2,7 @@ const User = require("../models/user.model.js");
 const jwt = require("jsonwebtoken");
 const { ApiError } = require("../utils/apiError.js");
 
-const verifyJWT = async (req, _, next) => {
+const verifyJWT = async (req, res, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
@@ -29,6 +29,7 @@ const verifyJWT = async (req, _, next) => {
     next();
   } catch (error) {
     // throw new ApiError(401, error?.message || "Invalid access token");
+    console.log(error);
     return res
       .status(error.statusCode || 401)
       .json({ message: error.message || "Invalid access token", error });

@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import cookies from "js-cookie";
 
 const UserPrivateRoute = ({ children }) => {
   const navigate = useNavigate();
-  const userDetails = localStorage.getItem("userDetailes");
-  console.log(userDetails);
+  const token = cookies.get("accessToken");
+  const isAuth = !!token;
+  console.log(isAuth);
 
   useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!userDetails) {
+    if (!isAuth) {
       navigate("/login");
     }
-  }, [userDetails, navigate]);
+  }, [isAuth, navigate]);
 
-  return userDetails ? children : null;
+  return isAuth ? children : null;
 };
 
 export default UserPrivateRoute;
