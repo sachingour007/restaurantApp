@@ -1,0 +1,12 @@
+.adminlayoutSec{padding-top: 120px;
+    .wrapperSec{
+        .secHeading{display: flex; align-items: center; justify-content: center;margin-bottom: 70px;
+            h1{@include font48; font-family: $openSans; font-weight: $fontW700;color: #000; 
+            }
+        }
+        .mainContainer{display: flex;
+            .navLinks{width: 250px;}
+            .mainPages{width: calc(100% - 250px);}
+        }
+    }
+}

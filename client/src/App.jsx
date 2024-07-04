@@ -8,6 +8,9 @@ import {
   ScrollTop,
   Login,
   Register,
+  AdminLayout,
+  AdminUsers,
+  AdminMenu,
 } from "./components/index.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { menuData } from "../src/constantFiles/menuContent.js";
@@ -47,6 +50,10 @@ function App() {
           )}
           <Route path="/login" element={isAuth ? <Homepage /> : <Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/admin/" element={<AdminLayout />}>
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="menu" element={<AdminMenu />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>

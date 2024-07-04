@@ -4,9 +4,13 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
     }
     .navbar-link{padding-left: 20%;
         ul{display: flex; flex-flow: wrap;
-            li{padding: 5px 20px; color: #fff; text-align: center; text-transform: uppercase; @include font20; font-family: $openSans; font-weight: $fontW500; 
-             &:hover{color: $primary1;}
+            a{
+                li{padding: 5px 20px; color: #fff; text-align: center; text-transform: uppercase; @include font20; font-family: $openSans; font-weight: $fontW500; 
+                    &:hover{color: $primary1;}
+                }
+                &.active{li{color: #e69c00;}}
             }
+            
         }
     }
     .user-items{

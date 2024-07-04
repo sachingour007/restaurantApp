@@ -31,9 +31,9 @@ const Login = () => {
     }
   }, [isAuthenticate, success]);
 
-  const loginHandler = (e) => {
-    setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
-  };
+  // const loginHandler = (e) => {
+  //   setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
+  // };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({

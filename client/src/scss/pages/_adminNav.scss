@@ -1,0 +1,12 @@
+nav{background: #222831; border-top-right-radius: 10px; border-bottom-right-radius: 10px;
+    ul{display: flex; flex-flow: column; align-items: center; gap: 20px;
+        a{
+            li{color: #fff; text-align: center; text-transform: uppercase; @include font20; font-family: $openSans; font-weight: $fontW500; padding-top: 20px;
+                &:hover{color: $primary1;}
+            }
+            &:last-child{padding-bottom: 20px;}
+            &.active{li{color: #e69c00;}}
+        }
+        
+    }
+}
