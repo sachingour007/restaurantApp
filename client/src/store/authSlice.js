@@ -69,6 +69,88 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// export const logoutUser = createAsyncThunk(
+//   "auth/logoutUser",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const response = await fetch(`${apiUrl}/auth/logout`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "Application/json",
+//         },
+//         credentials: "include",
+//       });
+
+//       if (response.status === 401) {
+//         Cookies.remove("accessToken");
+//         //Try refresh Token
+//         const refreshTokenResponse = await fetch(
+//           `${apiUrl}/auth/refresh-token`,
+//           {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "Application/json",
+//             },
+//             credentials: "include",
+//           }
+//         );
+
+//         if (refreshTokenResponse.ok) {
+//           const newTokenData = await refreshTokenResponse.json();
+//           console.log("new Token", newTokenData.accesToken);
+//           Cookies.set("accessToken", newTokenData.accesToken);
+//           Cookies.set("accessToken", newTokenData.refreshToken);
+
+//           //Logout Api
+//           const newResponse = await fetch(`${apiUrl}/auth/logout`, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "Application/json",
+//             },
+//             credentials: "include",
+//           });
+
+//           if (!newResponse.ok) {
+//             const data = await newResponse.json();
+//             toast.error("Failed to logout");
+//             return rejectWithValue(data.message || "Failed to logout");
+//           }
+//           const newData = await newResponse.json();
+//           console.log("logout user Data", newData);
+//           toast.success(data.message);
+//           localStorage.removeItem("userDetailes");
+//           Cookies.remove("accessToken");
+//           Cookies.remove("refreshToken");
+//           return newData;
+//         } else {
+//           console.log("new Token ", newTokenData);
+//           toast.success(newTokenData.message);
+//           localStorage.removeItem("userDetailes");
+//           Cookies.remove("accessToken");
+//           Cookies.remove("refreshToken");
+//           return newTokenData;
+//         }
+//       }
+
+//       if (!response.ok) {
+//         const data = await response.json();
+//         toast.error("Failed to logout");
+//         return rejectWithValue(data.message || "Failed to logout");
+//       }
+
+//       const data = await response.json();
+//       console.log("logout user Data", data);
+//       toast.success(data.message);
+//       localStorage.removeItem("userDetailes");
+//       Cookies.remove("accessToken");
+//       Cookies.remove("refreshToken");
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { rejectWithValue }) => {
@@ -76,61 +158,66 @@ export const logoutUser = createAsyncThunk(
       const response = await fetch(`${apiUrl}/auth/logout`, {
         method: "POST",
         headers: {
-          "Content-Type": "Application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
         credentials: "include",
       });
 
       if (response.status === 401) {
-        //Try refresh Token
-        const refreshResponse = await fetch(`${apiUrl}/auth/refresh-token`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "Application/json",
-          },
-          credentials: "include",
-        });
+        Cookies.remove("accessToken");
 
-        if (refreshResponse.ok) {
-          const newTokenData = await refreshResponse.json();
-          console.log("new Token", newTokenData.accesToken);
-          Cookies.set("accessToken", newTokenData.accesToken, {
-            expires: 7,
-            secure: true,
-          });
-          Cookies.set("refreshToken", newTokenData.refreshToken, {
-            expires: 7,
-            secure: true,
-          });
-
-          //Logout Api
-          const response = await fetch(`${apiUrl}/auth/logout`, {
+        // Try refresh Token
+        const refreshTokenResponse = await fetch(
+          `${apiUrl}/auth/refresh-token`,
+          {
             method: "POST",
             headers: {
-              "Content-Type": "Application/json",
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+
+        if (refreshTokenResponse.ok) {
+          const newTokenData = await refreshTokenResponse.json();
+          console.log("New Token", newTokenData.data.accesToken);
+
+          // Set new access token
+          Cookies.set("accessToken", newTokenData.data.accesToken);
+          Cookies.set("refreshToken", newTokenData.data.refreshToken);
+
+          // Logout API with new token
+          const newResponse = await fetch(`${apiUrl}/auth/logout`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${newTokenData.data.accesToken}`,
             },
             credentials: "include",
           });
 
-          if (!response.ok) {
-            const data = await response.json();
+          if (!newResponse.ok) {
+            const data = await newResponse.json();
             toast.error("Failed to logout");
-            return rejectWithValue(data.message || "Failed to logout");
+            return rejectWithValue(data.message || "FFailed to logout");
           }
-          const data = await response.json();
-          console.log("logout user Data", data);
-          toast.success(data.message);
+
+          const newData = await newResponse.json();
+          console.log("newData", newData);
+          toast.success(newData.message);
           localStorage.removeItem("userDetailes");
           Cookies.remove("accessToken");
           Cookies.remove("refreshToken");
-          return data;
+          return newData;
         } else {
-          console.log("new Token ", newTokenData);
-          toast.success(newTokenData.message);
-          localStorage.removeItem("userDetailes");
+          const newTokenData = await refreshTokenResponse.json();
+          console.log("Refresh Token failed", newTokenData);
+          toast.error(newTokenData.message);
+          localStorage.removeItem("userDetails");
           Cookies.remove("accessToken");
           Cookies.remove("refreshToken");
-          return newTokenData;
+          return rejectWithValue(newTokenData.message);
         }
       }
 
@@ -141,9 +228,9 @@ export const logoutUser = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("logout user Data", data);
+      console.log("Logout user data", data);
       toast.success(data.message);
-      localStorage.removeItem("userDetailes");
+      localStorage.removeItem("userDetails");
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
       return data;

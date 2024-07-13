@@ -50,7 +50,6 @@ const userSchema = new Schema(
 // /**We bcrypt the password by bcrypJS and mongoose Pre hook method */
 
 userSchema.pre("save", async function (next) {
-  // console.log(this);
   const user = this;
   //we check only when password change then run the function
   if (!user.isModified("password")) {
@@ -77,8 +76,6 @@ userSchema.pre("save", async function (next) {
 // }
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-  console.log("Decrypted Password:", password);
-  console.log("Stored Hashed Password:", this.password);
   try {
     return await bcrypt.compare(password, this.password);
   } catch (error) {

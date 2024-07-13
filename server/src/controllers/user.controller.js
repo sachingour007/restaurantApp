@@ -77,7 +77,6 @@ const registerController = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, username, password } = req.body;
-    console.log("login Function ", password);
 
     if (!(email || username)) {
       throw new ApiError(400, "username or email is required");
@@ -86,14 +85,12 @@ const loginUser = async (req, res) => {
     const userCopy = await User.findOne({
       $or: [{ email }, { username }],
     });
-    console.log("User Object:", userCopy);
 
     if (!userCopy) {
       throw new ApiError(404, "User does not exist");
     }
 
     const isPasswordValid = await userCopy.isPasswordCorrect(password);
-    console.log("Is Password Valid:", isPasswordValid);
 
     if (!isPasswordValid) {
       throw new ApiError(401, "Invalid user credentials");
@@ -181,13 +178,14 @@ const refreshAccessToken = async (req, res) => {
 
   try {
     const decodedToken = jwt.verify(
-      incomingRefreshToken,
+      incomingRefreshToken.trim(),
       process.env.ACCESS_TOKEN_SECRET
     );
 
-    console.log(decodedToken);
+    console.log("decode token", decodedToken._id);
 
     const user = await User.findById(decodedToken?._id);
+    console.log("userDetails", user);
 
     if (!user) {
       throw new ApiError(401, "invalid request Token");
@@ -197,15 +195,20 @@ const refreshAccessToken = async (req, res) => {
       throw new ApiError(401, "Refresh token is expired or used");
     }
 
+    console.log("mogodbKey", user.refreshToken);
+
     const options = {
       httpOnly: true,
       secure: true,
     };
 
-    const { accesToken, newRefreshToken } = await generateAccessAndRefreshToken(
+    const { accesToken, refreshToken } = await generateAccessAndRefreshToken(
       user._id
     );
 
+    console.log("new refreshToken" , refreshToken);
+
+    const newRefreshToken = refreshToken;
     return res
       .status(200)
       .cookie("accessToken", accesToken)
@@ -219,6 +222,7 @@ const refreshAccessToken = async (req, res) => {
       );
   } catch (error) {
     // throw new ApiError(401, error?.message || "Invalid refresh Tonken")
+    console.log(error);
     return res
       .status(error.statusCode || 401)
       .json({ message: error.message, error });
