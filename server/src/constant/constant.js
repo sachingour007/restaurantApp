@@ -1,3 +1,1 @@
-const DB_Name = "restaurantApp";
-
-module.exports = { DB_Name };
+export const DB_NAME = "restaurant-app";

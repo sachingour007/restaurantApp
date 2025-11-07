@@ -1,25 +1,21 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
 const app = express();
-const cors = require("cors");
-const cockieParser = require("cookie-parser");
+const { errorMiddleware } = require("./middleware/errorMiddleware");
+const cookieParser = require("cookie-parser");
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    method: "GET, POST, PUT, DELETE, PATCH",
-    credentials: true,
-  })
-);
+//Middleware
 app.use(express.json({ limit: "16kb" })); //Json Handle with Body
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); //Json Handle with URL
 app.use(express.static("public")); //use for static items
-app.use(cockieParser()); //Server to user's Browser cookies access for tokens
+app.use(cookieParser()); //Server to user's Browser cookies access for tokens
 
-//Import Routes
-const userRoutes = require("./routes/user.routes");
+// Import Routes
+const { authRouter } = require("./router/authRouter");
+const { userRouter } = require("./router/userRouter");
 
-//Define Routes
-app.use("/api/v1/auth", userRoutes);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
+
+app.use(errorMiddleware);
 
 module.exports = app;
