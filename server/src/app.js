@@ -12,9 +12,11 @@ app.use(cookieParser()); //Server to user's Browser cookies access for tokens
 // Import Routes
 const { authRouter } = require("./router/authRouter");
 const { userRouter } = require("./router/userRouter");
+const { menuRouter } = require("./router/menuRouter");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/menu", menuRouter);
 
 app.use(errorMiddleware);
 

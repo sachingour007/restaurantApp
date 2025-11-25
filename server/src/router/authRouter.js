@@ -22,7 +22,6 @@ authRouter.post(
 
 		const hashPassword = await bcrypt.hash(password, 10);
 		const user = new User({ fullName, email, password: hashPassword, phone });
-		console.log(user);
 
 		await user.save();
 
@@ -74,4 +73,14 @@ authRouter.post(
 	})
 );
 
+authRouter.post(
+	"/logout",
+	asyncHandler(async (req, res, next) => {
+		res.clearCookie("token", {
+			httpOnly: true,
+			secure: false,
+		});
+		res.status(200).json(new ApiResponse(200, "", "User logout successful!"));
+	})
+);
 module.exports = { authRouter };
