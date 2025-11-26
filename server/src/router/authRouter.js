@@ -34,13 +34,14 @@ authRouter.post(
 		});
 
 		user.password = undefined;
+		user.isAdmin = undefined;
 		res.status(200).json(new ApiResponse(200, user, "Signup succesfully"));
 	})
 );
 
 authRouter.post(
 	"/login",
-	asyncHandler(async (req, res) => {
+	asyncHandler(async (req, res, next) => {
 		const { email, password } = req.body;
 
 		if (!email || !password) {
@@ -66,6 +67,7 @@ authRouter.post(
 		});
 
 		userDetails.password = undefined;
+		userDetails.isAdmin = undefined;
 
 		res.status(200).json(
 			new ApiResponse(200, userDetails, "login Succesfully")
