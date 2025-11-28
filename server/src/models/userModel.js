@@ -1,30 +1,46 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
 const userSchema = mongoose.Schema(
 	{
 		fullName: {
 			type: String,
-			require: true,
+			required: true,
 			trim: true,
 		},
 		email: {
 			type: String,
-			require: true,
+			required: true,
 			trim: true,
 			unique: true,
 			lowercase: true,
+			validate(val) {
+				if (!validator.isEmail(val)) {
+					throw new Error("Invalid email address: " + val);
+				}
+			},
 		},
 		password: {
 			type: String,
-			require: true,
+			required: true,
 			trim: true,
+			validate(val) {
+				if (!validator.isStrongPassword(val)) {
+					throw new Error("Invalid email address: " + val);
+				}
+			},
 		},
 		phone: {
 			type: String,
-			min: [10, "Please Enter Valid Number"],
-			max: [10, "Please Enter Valid Number"],
+			required: [true, "Phone number is required"],
+			validate: {
+				validator: function (v) {
+					return /^\d{10}$/.test(v);
+				},
+				message: "Please enter valid number",
+			},
 		},
 		isAdmin: {
 			type: Boolean,
