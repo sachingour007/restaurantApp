@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import login_bg from "../assets/images/login_bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/authSlice.js";
 import { Formik, useFormik } from "formik";
 import { loginSchema } from "../formSchema/index.js";
-
 
 const initialValues = {
   email: "",
@@ -13,27 +10,7 @@ const initialValues = {
 };
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const { user, loading, isAuthenticate, error, success } = useSelector(
-    (store) => store.auth
-  );
-  // console.log("isAuthenticate", isAuthenticate);
-  // console.log("user", user);
-  // console.log("error", error);
-  // console.log("success", success);
-
   const navigate = useNavigate();
-  useEffect(() => {
-    if (success && isAuthenticate) {
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  }, [isAuthenticate, success]);
-
-  // const loginHandler = (e) => {
-  //   setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
-  // };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({

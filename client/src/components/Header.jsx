@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,32 +8,10 @@ import {
   faBarsStaggered,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../store/authSlice";
 
 const Header = () => {
   const [navVisible, setNavVisible] = useState(false);
-  const { isAuthenticate, user } = useSelector((store) => store.auth);
-  // console.log("isAuthenticate", isAuthenticate);
-  // console.log("user", user);
-  const dispatch = useDispatch();
-  const userDetails = localStorage.getItem("userDetailes");
-  const singleUser = JSON.parse(userDetails);
-  const navigate = useNavigate();
-
-  const logoutHandler = async () => {
-    try {
-      const result = await dispatch(logoutUser());
-      console.log("result", result);
-      if (result.payload.success) {
-        navigate("/login");
-      } else {
-        console.error("Logout failed", result.payload.message);
-      }
-    } catch (error) {
-      // console.log(error);
-    }
-  };
+  const singleUser = "";
 
   return (
     <header>
@@ -50,10 +28,10 @@ const Header = () => {
           <NavLink to={"/menu"}>
             <li>Menu</li>
           </NavLink>
-          <NavLink>
+          <NavLink to={"/about"}>
             <li>About</li>
           </NavLink>
-          <NavLink>
+          <NavLink to={"/book-table"}>
             <li>Book Table</li>
           </NavLink>
         </ul>
@@ -62,7 +40,7 @@ const Header = () => {
         <ul>
           {singleUser ? (
             <NavLink>
-              <li className="user-icon" onClick={logoutHandler}>
+              <li className="user-icon">
                 <FontAwesomeIcon icon={faRightFromBracket} />
               </li>
             </NavLink>
@@ -74,11 +52,7 @@ const Header = () => {
             </NavLink>
           )}
 
-          {singleUser ? (
-            <li className="user-name">{singleUser?.fullName}</li>
-          ) : (
-            ""
-          )}
+          {singleUser ? <li className="user-name">Sachin Gour</li> : ""}
 
           <NavLink>
             <li className="order-online">Cart</li>

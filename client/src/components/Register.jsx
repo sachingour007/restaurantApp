@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import login_banner from "../assets/images/login_banner.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../store/authSlice";
 import { useFormik } from "formik";
 import { registerSchema } from "../formSchema/index.js";
 
@@ -16,18 +14,7 @@ const initialValues = {
 };
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const { success, user, error } = useSelector((store) => store.auth);
-  console.log("User", user);
-  console.log("error", error);
-  console.log("succes", success);
-
   const navigate = useNavigate();
-  useEffect(() => {
-    if (success) {
-      navigate("/login");
-    }
-  }, [success, navigate]);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({

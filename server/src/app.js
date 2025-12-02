@@ -14,11 +14,13 @@ const { authRouter } = require("./router/authRouter");
 const { userRouter } = require("./router/userRouter");
 const { menuRouter } = require("./router/menuRouter");
 const { tableBookRouter } = require("./router/tableBookRouter");
+const { cartRouter } = require("./router/cartRouter");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/menu", menuRouter);
 app.use("/table-booking", tableBookRouter);
+app.use("/user/cart", cartRouter);
 
 app.use(errorMiddleware);
 
