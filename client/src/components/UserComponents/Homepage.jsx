@@ -1,10 +1,10 @@
 import React from "react";
-import heroBg from "../assets/images/hero-bg.jpg";
+import heroBg from "../../assets/images/hero-bg.jpg";
 import Navbar from "./Header";
 import { useNavigate } from "react-router-dom";
-import BannerSlider from "./SliderComponant/BannerSlider";
+import BannerSlider from "../SliderComponant/BannerSlider";
 import OfferCard from "./OfferCard";
-import { menuData } from "../constantFiles/menuContent";
+import { menuData } from "../../constantFiles/menuContent";
 import Menu from "./Menu";
 
 const Homepage = () => {

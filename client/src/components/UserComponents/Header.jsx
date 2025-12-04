@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,10 +8,30 @@ import {
   faBarsStaggered,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { removeUser } from "../../store/userSlice";
+import { BASE_URL } from "../../constantFiles/baseURL";
 
 const Header = () => {
+  const userDetails = useSelector((store) => store.user);
   const [navVisible, setNavVisible] = useState(false);
-  const singleUser = "";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOutHandler = async () => {
+    try {
+      const logoutUser = await axios.post(
+        BASE_URL + "/auth/logout",
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeUser());
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <header>
@@ -38,9 +58,9 @@ const Header = () => {
       </div>
       <div className="user-items">
         <ul>
-          {singleUser ? (
+          {userDetails ? (
             <NavLink>
-              <li className="user-icon">
+              <li className="user-icon" onClick={logOutHandler}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
               </li>
             </NavLink>
@@ -52,7 +72,11 @@ const Header = () => {
             </NavLink>
           )}
 
-          {singleUser ? <li className="user-name">Sachin Gour</li> : ""}
+          {userDetails ? (
+            <li className="user-name">{userDetails.fullName}</li>
+          ) : (
+            ""
+          )}
 
           <NavLink>
             <li className="order-online">Cart</li>

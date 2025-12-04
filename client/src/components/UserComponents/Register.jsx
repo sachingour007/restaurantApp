@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import login_banner from "../assets/images/login_banner.png";
+import login_banner from "../../assets/images/login_banner.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { registerSchema } from "../formSchema/index.js";
+import { registerSchema } from "../../formSchema/index.js";
 
 const initialValues = {
   fullName: "",

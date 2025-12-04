@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import login_bg from "../assets/images/login_bg.jpg";
+import login_bg from "../../assets/images/login_bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../../constantFiles/baseURL.js";
 import { Formik, useFormik } from "formik";
-import { loginSchema } from "../formSchema/index.js";
+import { loginSchema } from "../../formSchema/index.js";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/userSlice.js";
 
 const initialValues = {
   email: "",
@@ -11,13 +15,26 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const loginHandler = async (val) => {
+    try {
+      const userData = await axios.post(`${BASE_URL}/auth/login`, val, {
+        withCredentials: true,
+      });
+      dispatch(addUser(userData.data.data));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
       onSubmit: (values, action) => {
-        dispatch(loginUser(values));
+        loginHandler(values);
         action.resetForm();
       },
     });
