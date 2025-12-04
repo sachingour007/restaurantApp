@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
-import AdminMain from "./AdminDashbord/AdminMain";
-import UserMain from "./UserComponents/UserMain";
-import axios from "axios";
-import { BASE_URL } from "../constantFiles/baseURL";
+import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../store/userSlice";
+import { addUser, removeUser } from "../store/userSlice.js";
+import { BASE_URL } from "../constantFiles/baseURL.js";
+import axios from "axios";
+import { Outlet } from "react-router-dom";
 
-export const Body = () => {
+const RootLayout = () => {
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const user = useSelector((store) => {
-    store.user;
-  });
+  // const navigate = useNavigate();
   const getCurrUser = async () => {
     if (user) {
       return;
@@ -23,7 +21,7 @@ export const Body = () => {
     } catch (error) {
       if (error.response?.status === 401) {
         dispatch(removeUser());
-        navigate("/");
+        // navigate("/");
       }
     }
   };
@@ -32,10 +30,7 @@ export const Body = () => {
     getCurrUser();
   }, [user, dispatch]);
 
-  return (
-    <>
-      <AdminMain />
-      <UserMain />
-    </>
-  );
+  return <Outlet />;
 };
+
+export default RootLayout;

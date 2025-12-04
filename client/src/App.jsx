@@ -1,6 +1,6 @@
-import react from "react";
+import react, { useEffect } from "react";
 import "./scss/main.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import {
   Homepage,
   Menu,
@@ -10,10 +10,10 @@ import {
   UserMain,
   AdminMain,
 } from "./components/index.js";
+import { menuData } from "../src/constantFiles/menuContent.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import { menuData } from "../src/constantFiles/menuContent.js";
-import { Body } from "./components/Body.jsx";
+import RootLayout from "./components/RootLayout.jsx";
 
 function App() {
   return (
@@ -22,9 +22,10 @@ function App() {
         <ScrollTop />
 
         <Routes>
-          <Route path="/" element={<Body />}>
-            {/* User Routes */}
-            <Route element={<UserMain />}>
+          {/* Root Layout */}
+          <Route element={<RootLayout />}>
+            {/* ====== USER ROUTES ====== */}
+            <Route path="/" element={<UserMain />}>
               <Route index element={<Homepage />} />
               <Route
                 path="menu"
@@ -34,7 +35,7 @@ function App() {
               <Route path="register" element={<Register />} />
             </Route>
 
-            {/* Admin Routes */}
+            {/* ====== ADMIN ROUTES ====== */}
             <Route path="/admin" element={<AdminMain />} />
           </Route>
         </Routes>
