@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import heroBg from "../../assets/images/hero-bg.jpg";
 import Navbar from "./Header";
 import { useNavigate } from "react-router-dom";
 import BannerSlider from "../SliderComponant/BannerSlider";
 import OfferCard from "./OfferCard";
-import { menuData } from "../../constantFiles/menuContent";
-import Menu from "./Menu";
+import useMenuData from "../../hooks/useMenuData";
+import { useSelector } from "react-redux";
 
 const Homepage = () => {
+  const getMenu = useMenuData();
+  const foodItems = useSelector((store) => store.menu);
+  const featureCard = (foodItems || []).filter(
+    (item) => item.isFeature === true
+  );
+  console.log(featureCard);
+
   const navigate = useNavigate();
-  const limitedCards = menuData.slice(0, 3);
+
+  useEffect(() => {
+    getMenu();
+  }, []);
+
   return (
     <>
       <section className="heroSection">
@@ -88,7 +99,18 @@ const Homepage = () => {
         </div>
       </section>
       <OfferCard />
-      <Menu cards={limitedCards} showTab={false} />
+      <section className="featureCardSec">
+        <div>
+           <div className="secHeading">
+            <h2>Our Menu</h2>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+
+      </section>
+      {/* <Menu cards={limitedCards} showTab={false} /> */}
     </>
   );
 };

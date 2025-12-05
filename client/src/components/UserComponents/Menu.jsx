@@ -1,89 +1,84 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import f1 from "../../assets/images/f1.png";
 import MenuCards from "./MenuCards";
 import { Link } from "react-router-dom";
+import useMenuData from "../../hooks/useMenuData";
+import { useSelector } from "react-redux";
 
-const Menu = ({ cards, showTab }) => {
-  const [foodItems, setFoodItems] = useState(cards);
-  const [category, setCategory] = useState([]);
-  const [foodFilter, setFoodFilter] = useState("all");
-  const [filterFoodItems, setFilterFoodItems] = useState(cards);
+const Menu = ({ showTab }) => {
+  const getMenu = useMenuData();
+  const foodItems = useSelector((store) => store.menu);
+  const menuCategories = [
+    ...new Set((foodItems || []).map((item) => item.category)),
+  ];
+  const [category, setCategory] = useState("all");
 
-  const getFoodItems = (cat) => {
-    if (cat === "all") {
-      setFilterFoodItems(cards);
+  const filteredItems =
+    category === "all"
+      ? foodItems
+      : foodItems.filter((food) => food.category === category);
+
+  const foodHandler = (val) => {
+    if (val === "all") {
+      setCategory("all");
     } else {
-      const foods = cards.filter((el) => el.category === cat);
-      setFilterFoodItems(foods);
+      setCategory(val);
     }
-
-    setFoodFilter(cat);
   };
-
-  const foodHandler = (cat) => {
-    getFoodItems(cat);
-  };
-
-  //category Filter Function
-  const getUniqueCategory = (item) => {
-    const allCategory = item.map((el) => el.category);
-    const alluniqueCategory = [...new Set(allCategory)];
-    setCategory(alluniqueCategory);
-  };
-
   useEffect(() => {
-    getUniqueCategory(foodItems);
-  }, [foodItems]);
+    getMenu();
+  }, []);
 
   return (
-    <section className="menuSection">
-      <div className="menuWrapper">
-        <div className="secHeading">
-          <h2>Our Menu</h2>
-        </div>
-        <div className="contentContainer">
-          <div className="menuCardContainer">
-            {showTab && (
-              <div className="tabsList">
-                <ul>
-                  <li
-                    onClick={() => foodHandler("all")}
-                    className={foodFilter === "all" ? "activeTab" : ""}
-                  >
-                    All
-                  </li>
-                  {category.map((cat) => (
-                    <li
-                      onClick={() => foodHandler(cat)}
-                      key={cat}
-                      className={foodFilter === cat ? "activeTab" : ""}
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="tabContent">
-              <div className="allCards">
-                {filterFoodItems.map((items) => {
-                  return <MenuCards key={items.id} {...items} />;
-                })}
-              </div>
-            </div>
+    foodItems && (
+      <section className="menuSection">
+        <div className="menuWrapper">
+          <div className="secHeading">
+            <h2>Our Menu</h2>
           </div>
-          {!showTab ? (
-            <div className="viewMore">
-              <Link to={"/menu"}>View More</Link>
+          <div className="contentContainer">
+            <div className="menuCardContainer">
+              {showTab && (
+                <div className="tabsList">
+                  <ul>
+                    <li
+                      onClick={() => foodHandler("all")}
+                      className={category === "all" ? "activeTab" : ""}
+                    >
+                      All
+                    </li>
+                    {menuCategories.map((cat) => (
+                      <li
+                        onClick={() => foodHandler(cat)}
+                        key={cat}
+                        className={category === cat ? "activeTab" : ""}
+                      >
+                        {cat}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div className="tabContent">
+                <div className="allCards">
+                  {filteredItems.map((items) => {
+                    return <MenuCards key={items._id} {...items} />;
+                  })}
+                </div>
+              </div>
             </div>
-          ) : (
-            ""
-          )}
+            {!showTab ? (
+              <div className="viewMore">
+                <Link to={"/menu"}>View More</Link>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )
   );
 };
 

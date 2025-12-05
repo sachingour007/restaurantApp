@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../constantFiles/baseURL.js";
 import login_banner from "../../assets/images/login_banner.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { registerSchema } from "../../formSchema/index.js";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/userSlice.js";
 
 const initialValues = {
   fullName: "",
-  username: "",
   email: "",
   password: "",
   phone: "",
@@ -15,13 +17,31 @@ const initialValues = {
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userRegister = async (value) => {
+    try {
+      const registerUserData = await axios.post(
+        BASE_URL + "/auth/signup",
+        value,
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(addUser(registerUserData.data.data));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: registerSchema,
       onSubmit: (values, action) => {
-        dispatch(registerUser(values));
+        userRegister(values);
         action.resetForm();
       },
     });
@@ -50,21 +70,6 @@ const Register = () => {
               />
               {errors.fullName && touched.fullName ? (
                 <p>{errors.fullName}</p>
-              ) : null}
-            </div>
-            <div className="inputContainer">
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Enter Username..."
-                value={values.username}
-                required
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.username && touched.username ? (
-                <p>{errors.username}</p>
               ) : null}
             </div>
             <div className="inputContainer">

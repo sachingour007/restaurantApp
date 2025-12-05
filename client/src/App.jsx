@@ -9,11 +9,14 @@ import {
   Register,
   UserMain,
   AdminMain,
+  About,
+  TableBook,
 } from "./components/index.js";
 import { menuData } from "../src/constantFiles/menuContent.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import RootLayout from "./components/RootLayout.jsx";
+import UserProtectRoute from "./routes/UserProtectRoute.jsx";
 
 function App() {
   return (
@@ -33,6 +36,15 @@ function App() {
               />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
+              <Route path="about" element={<About />} />
+              <Route
+                path="/book-table"
+                element={
+                  <UserProtectRoute>
+                    <TableBook />
+                  </UserProtectRoute>
+                }
+              />
             </Route>
 
             {/* ====== ADMIN ROUTES ====== */}

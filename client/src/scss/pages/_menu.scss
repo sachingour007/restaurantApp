@@ -7,7 +7,7 @@
             .menuCardContainer{
                 .tabsList{margin-bottom: 30px;
                     ul{display: flex; align-items: center; justify-content: center; gap: 20px; flex-flow: wrap;
-                        li{padding: 7px 25px; cursor: pointer; transition: all 0.3s ease;
+                        li{padding: 7px 25px; cursor: pointer; transition: all 0.3s ease; text-transform: capitalize;
                             &.activeTab{background: #222831; color: white; border-radius: 25px; transform: scale(1.1); transition: all 0.3s ease; }
                         }
                     }
@@ -19,7 +19,7 @@
                                 img{width: 200px; height: 150px; transition: transform 0.3s ease-in-out;}
                             }
                             .contentBox{padding: 25px;
-                                h4{color: #ffffff; @include font20; font-weight: $fontW700; line-height: 170%; letter-spacing: 0.4px;font-family:$openSans;}
+                                h4{color: #ffffff; @include font20; font-weight: $fontW700; line-height: 170%; letter-spacing: 0.4px;font-family:$openSans; text-transform: capitalize;}
                                 & > p{color: #fff;@include font16; font-weight: $fontW400; line-height: 160%; letter-spacing: 0.48px; margin: 10px 0 20px 0;}
                                 .priceBox{display: flex; align-items: center; flex-flow: wrap; justify-content: space-between;
                                  & > p{color: #fff; @include font16; font-family: $openSans; font-weight: $fontW400;}

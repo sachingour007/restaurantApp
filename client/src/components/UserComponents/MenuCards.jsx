@@ -3,27 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import f1 from "../../assets/images/f1.png";
 
-const MenuCards = ({
-  id,
-  category,
-  foodImg,
-  foodName,
-  description,
-  price,
-  cartIcon,
-}) => {
+const MenuCards = ({ foodImage, foodName, description, price }) => {
   return (
     <div className="card">
       <div className="imgBox">
-        <img src={foodImg} alt="" />
+        <img src={foodImage} alt="foodImage" />
       </div>
       <div className="contentBox">
         <h4>{foodName}</h4>
         <p>{description}</p>
         <div className="priceBox">
-          <p>{price}</p>
+          <p>₹{price}/-</p>
           <span>
-            <FontAwesomeIcon icon={cartIcon} />
+            <FontAwesomeIcon icon={faCartShopping} />
           </span>
         </div>
       </div>

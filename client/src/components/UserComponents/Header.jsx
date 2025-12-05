@@ -27,7 +27,7 @@ const Header = () => {
         { withCredentials: true }
       );
       dispatch(removeUser());
-      navigate("/login");
+      navigate("/login", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +40,7 @@ const Header = () => {
           <span>Hot Cornor</span>
         </NavLink>
       </div>
+
       <div className="navbar-link">
         <ul>
           <NavLink to={"/"}>
@@ -56,6 +57,7 @@ const Header = () => {
           </NavLink>
         </ul>
       </div>
+
       <div className="user-items">
         <ul>
           {userDetails ? (
@@ -73,14 +75,15 @@ const Header = () => {
           )}
 
           {userDetails ? (
-            <li className="user-name">{userDetails.fullName}</li>
+            <li className="user-name">Hi, {userDetails.fullName}</li>
           ) : (
             ""
           )}
-
-          <NavLink>
-            <li className="order-online">Cart</li>
-          </NavLink>
+          {userDetails && (
+            <NavLink>
+              <li className="order-online">Cart</li>
+            </NavLink>
+          )}
         </ul>
       </div>
 
