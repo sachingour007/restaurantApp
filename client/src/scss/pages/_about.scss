@@ -11,4 +11,22 @@
       }
     }
   }
+  @media all and (max-width: 1024px){
+    .aboutWrapper{padding: 180px 0;
+      .container{max-width: 100%;}
+    }
+  }
+  @media all and (max-width: 720px){
+    .aboutWrapper{padding: 100px 0;
+      .container{flex-flow: column; flex-direction: column-reverse;
+        .imgBox{width: 100%;
+          img{width: auto;}
+        }
+        .contentBox{width: 100%;
+          h2{font-size: 40px;}
+          p{font-size: 16px;}
+        }
+      }
+    }
+  }
 }

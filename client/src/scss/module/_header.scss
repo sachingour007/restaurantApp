@@ -69,10 +69,10 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
     }
 }
 @media all and (max-width: 820px){
-    header{
+    header{height: auto; padding-top: 30px; padding-bottom: 30px;
         .navbar-link{display: none;}
         .user-items{display: none;}
-        .hemburgerMenu{display: block; position: absolute; right: 29px; top: 29px;z-index: 1;
+        .hemburgerMenu{display: block;position: relative; z-index: 1;
             svg{font-size: 30px;
                 path{fill:#fff;}
             }
@@ -110,7 +110,7 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
     }
 }
 @media all and (max-width: 720px){
-    header{
+    header{padding-top: 10px; padding-bottom: 10px;
         .logoName{
             span{font-size: 32px;}
         }

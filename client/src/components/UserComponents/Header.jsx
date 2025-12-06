@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import react, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -103,17 +103,17 @@ const Header = () => {
         <div className="mblheaderContainer">
           <div className="mbl-navbar-link">
             <ul>
-              <NavLink>
-                <li>Home</li>
+              <NavLink to={"/"}>
+                <li onClick={() => setNavVisible(false)}>Home</li>
               </NavLink>
-              <NavLink>
-                <li>Menu</li>
+              <NavLink to={"/menu"}>
+                <li onClick={() => setNavVisible(false)}>Menu</li>
               </NavLink>
-              <NavLink>
-                <li>About</li>
+              <NavLink to={"/about"}>
+                <li onClick={() => setNavVisible(false)}>About</li>
               </NavLink>
-              <NavLink>
-                <li>Book Table</li>
+              <NavLink to={"/book-table"}>
+                <li onClick={() => setNavVisible(false)}>Book Table</li>
               </NavLink>
             </ul>
           </div>
