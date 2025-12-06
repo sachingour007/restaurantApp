@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import heroBg from "../../assets/images/hero-bg.jpg";
 import Navbar from "./Header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BannerSlider from "../SliderComponant/BannerSlider";
 import OfferCard from "./OfferCard";
 import useMenuData from "../../hooks/useMenuData";
 import { useSelector } from "react-redux";
+import Menu from "./Menu";
+import MenuCards from "./MenuCards";
 
 const Homepage = () => {
   const getMenu = useMenuData();
@@ -99,18 +101,30 @@ const Homepage = () => {
         </div>
       </section>
       <OfferCard />
-      <section className="featureCardSec">
-        <div>
-           <div className="secHeading">
-            <h2>Our Menu</h2>
-          </div>
-          <div>
-            
-          </div>
-        </div>
 
-      </section>
-      {/* <Menu cards={limitedCards} showTab={false} /> */}
+      {featureCard && (
+        <section className="menuSection homepageMenuSec">
+          <div className="menuWrapper">
+            <div className="secHeading">
+              <h2>Our Menu</h2>
+            </div>
+            <div className="contentContainer">
+              <div className="menuCardContainer">
+                <div className="tabContent">
+                  <div className="allCards">
+                    {featureCard.map((items) => {
+                      return <MenuCards key={items._id} {...items} />;
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="viewMore">
+                <Link to={"/menu"}>View More</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 };

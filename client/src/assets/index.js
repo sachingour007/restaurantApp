@@ -7,3 +7,4 @@ export { default as f6 } from "./images/f6.png";
 export { default as f7 } from "./images/f7.png";
 export { default as f8 } from "./images/f8.png";
 export { default as f9 } from "./images/f9.png";
+export {default as aboutImg} from "./images/about-img.png"

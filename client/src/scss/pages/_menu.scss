@@ -1,4 +1,4 @@
-.menuSection{padding-top: 120px;
+.menuSection{padding-top: 150px; margin-bottom: 100px;
     .menuWrapper{@include wrapper;
         .secHeading{display: flex; justify-content: center; align-items: center; margin-bottom: 45px;
             h2{@include font40; font-family: $dancingFont; font-weight: $fontW700; color: #000;}

@@ -1,4 +1,4 @@
-footer{@include wrapper;margin-top: 100px; padding-top: 50px; padding-bottom: 50px; background: #222831;
+footer{@include wrapper; padding-top: 50px; padding-bottom: 50px; background: #222831;
     .flexSec{ display: flex; justify-content: space-between; flex-flow: wrap;
         .contactUs{
             h2{@include font30; color: #fff; font-family: $dancingFont; font-weight: $fontW600; margin-bottom: 20px;}
@@ -38,9 +38,9 @@ footer{@include wrapper;margin-top: 100px; padding-top: 50px; padding-bottom: 50
         p{color: #fff; @include font16; font-weight: $fontW400; font-family: $openSans;}
     }
 
-    @media all and (max-width: 1800px){margin-top: 80px;}
-    @media all and (max-width: 1600px){margin-top: 60px;}
-    @media all and (max-width: 1440px){margin-top: 50px;}
+    @media all and (max-width: 1800px){padding-top: 80px;}
+    @media all and (max-width: 1600px){padding-top: 60px;}
+    @media all and (max-width: 1440px){padding-top: 50px;}
     @media all and (max-width: 1280px){}
     @media all and (max-width: 720px){
         .flexSec{flex-flow: column; gap: 20px; align-items: center;margin-bottom: 20px;
