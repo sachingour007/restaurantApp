@@ -1,5 +1,6 @@
 import react, { useEffect } from "react";
 import "./scss/main.scss";
+import "leaflet/dist/leaflet.css";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import {
   Homepage,
@@ -37,14 +38,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="about" element={<About />} />
-              <Route
-                path="/book-table"
-                element={
-                  <UserProtectRoute>
-                    <TableBook />
-                  </UserProtectRoute>
-                }
-              />
+              <Route path="/book-table" element={<TableBook />} />
             </Route>
 
             {/* ====== ADMIN ROUTES ====== */}

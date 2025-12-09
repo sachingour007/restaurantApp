@@ -1,0 +1,23 @@
+.tableSection{
+  .tableWrapper{@include wrapperMargin; padding: 170px 0 120px ;
+    h2{color: #000; font-family: $dancingFont; @include font40; font-weight: bold; margin-bottom: 40px;}
+    .mainContainer{display: flex; justify-content: center; gap: 50px;
+      .formContainer{width: 50%;
+      form{
+        .inputContainer{padding: 10px 20px; width: 100%;@include font18; font-family: $openSans; color: #000; border:  1px solid #999; margin-bottom: 25px;
+          input{width: 100%; color: #000;
+            &::placeholder{@include font20; font-family: $openSans; color: #000;}
+          }
+          select{width: 100%; color: #000;
+            option{color: #000;}
+          }
+        }
+        input[type="submit"]{@include font18; font-weight: $fontW700; cursor: pointer; text-transform: uppercase; display: inline-block; padding: 10px 35px; background-color: #ffbe33; color: #ffffff; border-radius: 45px; -webkit-transition: all 0.3s; transition: all 0.3s; border: none;
+          &:hover{background-color: #e69c00;}
+        }
+      }
+    }
+    .mapBox{width: 50%; border-radius: 20px; overflow: hidden;}
+    }
+  }
+}

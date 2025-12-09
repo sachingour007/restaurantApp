@@ -11,13 +11,14 @@ import MenuCards from "./MenuCards";
 
 const Homepage = () => {
   const getMenu = useMenuData();
+  const navigate = useNavigate();
   const foodItems = useSelector((store) => store.menu);
+  
   const featureCard = (foodItems || []).filter(
     (item) => item.isFeature === true
   );
   console.log(featureCard);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     getMenu();
