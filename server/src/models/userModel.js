@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
 			trim: true,
 			validate(val) {
 				if (!validator.isStrongPassword(val)) {
-					throw new Error("Invalid email address: " + val);
+					throw new Error("Weak password: " + val);
 				}
 			},
 		},

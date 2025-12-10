@@ -26,7 +26,6 @@ authRouter.post(
 		await user.save();
 
 		const token = await user.getJwt();
-		console.log(token);
 		res.cookie("token", token, {
 			secure: false,
 			httpOnly: true,
@@ -34,7 +33,6 @@ authRouter.post(
 		});
 
 		user.password = undefined;
-		user.isAdmin = undefined;
 		res.status(200).json(new ApiResponse(200, user, "Signup succesfully"));
 	})
 );
@@ -67,7 +65,6 @@ authRouter.post(
 		});
 
 		userDetails.password = undefined;
-		userDetails.isAdmin = undefined;
 
 		res.status(200).json(
 			new ApiResponse(200, userDetails, "login Succesfully")

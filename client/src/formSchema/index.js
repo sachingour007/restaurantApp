@@ -13,10 +13,26 @@ export const registerSchema = Yup.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       "Password must contain at least one special character"
     ),
-  phone: Yup.string().min(10).max(12).required("Please enter your Phone"),
+  phone: Yup.string().min(10).max(10).required("Please enter your Phone"),
 });
 
 export const loginSchema = Yup.object({
   email: Yup.string().email().required("Please enter your Email"),
   password: Yup.string().min(3).max(16).required("Please enter your Password"),
+});
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+export const tableBooSchema = Yup.object({
+  fullName: Yup.string().min(3).max(25).required("Please enter your FullName"),
+  phone: Yup.string().min(10).max(10).required("Please enter your Phone"),
+  email: Yup.string().email().required("Please enter your Email"),
+  date: Yup.date()
+    .required("Please select a date")
+    .min(today, "Past date is not allowed"),
+  personCount: Yup.number()
+    .transform((value) => (isNaN(value) ? undefined : value))
+    .required("Select number of persons"),
+  timeSlot: Yup.string().required("Select a time slot"),
 });

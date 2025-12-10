@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { registerSchema } from "../../formSchema/index.js";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../store/userSlice.js";
+import { toast } from "react-toastify";
 
 const initialValues = {
   fullName: "",
@@ -28,11 +29,9 @@ const Register = () => {
           withCredentials: true,
         }
       );
-
-      dispatch(addUser(registerUserData.data.data));
-      navigate("/");
+      return registerUserData.data;
     } catch (error) {
-      console.log(error);
+      throw error.response?.data?.message || "Server Error!";
     }
   };
 
@@ -40,9 +39,16 @@ const Register = () => {
     useFormik({
       initialValues: initialValues,
       validationSchema: registerSchema,
-      onSubmit: (values, action) => {
-        userRegister(values);
-        action.resetForm();
+      onSubmit: async (values, action) => {
+        try {
+          const result = await userRegister(values);
+          dispatch(addUser(result.data.data));
+          navigate("/");
+          action.resetForm();
+          toast.success("Register SuccessFully.");
+        } catch (error) {
+          toast.error(error);
+        }
       },
     });
 

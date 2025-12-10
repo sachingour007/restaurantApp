@@ -668,3 +668,7 @@ $fontW900 : 900;
   .toastProgress {
     background: #333F48 !important;
   }
+
+  .hideScrollbarhtml, .hideScrollbar {
+    overflow: hidden !important;
+}

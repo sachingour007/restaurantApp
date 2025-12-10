@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,8 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { removeUser } from "../../store/userSlice";
 import { BASE_URL } from "../../constantFiles/baseURL";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  // const [isOpenMenu, setIsOpenMenu] = useState(false);
   const userDetails = useSelector((store) => store.user);
   const [navVisible, setNavVisible] = useState(false);
   const dispatch = useDispatch();
@@ -28,10 +30,21 @@ const Header = () => {
       );
       dispatch(removeUser());
       navigate("/login", { replace: true });
+      toast.success("Logout Successfully");
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message);
     }
   };
+
+  useEffect(() => {
+    if (navVisible && window.innerWidth <= 820) {
+      document.body.classList.add("hideScrollbar");
+      document.documentElement.classList.add("hideScrollbarhtml");
+    } else {
+      document.body.classList.remove("hideScrollbar");
+      document.documentElement.classList.remove("hideScrollbarhtml");
+    }
+  }, [navVisible]);
 
   return (
     <header>

@@ -38,7 +38,14 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="about" element={<About />} />
-              <Route path="/book-table" element={<TableBook />} />
+              <Route
+                path="/book-table"
+                element={
+                  <UserProtectRoute>
+                    <TableBook />
+                  </UserProtectRoute>
+                }
+              />
             </Route>
 
             {/* ====== ADMIN ROUTES ====== */}

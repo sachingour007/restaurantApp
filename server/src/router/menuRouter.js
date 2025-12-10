@@ -42,7 +42,6 @@ menuRouter.post(
 /* Menu Get API */
 menuRouter.get(
 	"/",
-	userAuth,
 	asyncHandler(async (req, res, next) => {
 		const allMenu = await Menu.find();
 		res.status(200).json(
@@ -128,7 +127,5 @@ menuRouter.patch(
 );
 
 /*Food item Delete */
-
-
 
 module.exports = { menuRouter };

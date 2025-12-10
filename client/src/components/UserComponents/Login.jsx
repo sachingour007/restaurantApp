@@ -7,6 +7,7 @@ import { Formik, useFormik } from "formik";
 import { loginSchema } from "../../formSchema/index.js";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../store/userSlice.js";
+import { toast } from "react-toastify";
 
 const initialValues = {
   email: "",
@@ -22,10 +23,9 @@ const Login = () => {
       const userData = await axios.post(`${BASE_URL}/auth/login`, val, {
         withCredentials: true,
       });
-      dispatch(addUser(userData.data.data));
-      navigate("/");
+      return userData;
     } catch (error) {
-      console.log(error);
+      throw error.response?.data?.message || "Server Error!";
     }
   };
 
@@ -33,9 +33,16 @@ const Login = () => {
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
-      onSubmit: (values, action) => {
-        loginHandler(values);
-        action.resetForm();
+      onSubmit: async (values, action) => {
+        try {
+          const result = await loginHandler(values);
+          dispatch(addUser(result.data.data));
+          navigate("/");
+          action.resetForm();
+          toast.success("Login SuccessFully.");
+        } catch (error) {
+          toast.error(error);
+        }
       },
     });
 
