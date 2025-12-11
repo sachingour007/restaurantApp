@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
@@ -20,35 +19,35 @@ const Footer = () => {
         <div className="contactUs">
           <h2>Contact Us</h2>
           <div className="contactLinks">
-            <Link>
+            <a>
               <FontAwesomeIcon icon={faLocationDot} />
-              Location
-            </Link>
-            <Link>
+              Kota, Rajasthan
+            </a>
+            <a href="tel:+91 0123456789">
               <FontAwesomeIcon icon={faPhone} />
               +91 0123456789
-            </Link>
-            <Link>
+            </a>
+            <a href="mailto: hotcornor@gmail.com">
               <FontAwesomeIcon icon={faEnvelope} />
-              demo@gmail.com
-            </Link>
+              hotcornor@gmail.com
+            </a>
           </div>
         </div>
         <div className="socialLinks">
           <h2>Hot Corner</h2>
           <div className="socialIcons">
-            <Link>
+            <a href="https://www.facebook.com/" target="_blank">
               <FontAwesomeIcon icon={faFacebook} />
-            </Link>
-            <Link>
+            </a>
+            <a href="https://x.com/" target="_blank">
               <FontAwesomeIcon icon={faTwitter} />
-            </Link>
-            <Link>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank">
               <FontAwesomeIcon icon={faInstagram} />
-            </Link>
-            <Link>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank">
               <FontAwesomeIcon icon={faLinkedin} />
-            </Link>
+            </a>
           </div>
         </div>
         <div className="openinnHours">

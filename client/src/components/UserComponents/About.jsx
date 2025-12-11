@@ -12,12 +12,17 @@ const About = () => {
           <div className="contentBox">
             <h2>We Are Hot Cornor</h2>
             <p>
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration in some form, by
-              injected humour, or randomised words which don't look even
-              slightly believable. If you are going to use a passage of Lorem
-              Ipsum, you need to be sure there isn't anything embarrassing
-              hidden in the middle of text. All
+              At HotCorner, we believe great food doesn’t have to be
+              complicated. Our kitchen serves freshly crafted fast-food
+              favourites made to satisfy every craving. From juicy,
+              flavour-packed burgers to oven-fresh pizzas, creamy pastas, and
+              crispy fries — every dish is prepared with quality ingredients and
+              a true passion for good taste. HotCorner started with one simple
+              idea: to create a place where people can enjoy quick, delicious
+              food without compromising on freshness. Whether you're grabbing a
+              bite with friends, ordering a late-night snack, or craving
+              something comforting on a busy day, HotCorner brings you flavours
+              that feel familiar yet exciting.
             </p>
           </div>
         </div>

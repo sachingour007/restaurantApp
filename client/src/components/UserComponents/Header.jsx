@@ -15,11 +15,14 @@ import { BASE_URL } from "../../constantFiles/baseURL";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  // const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const userDetails = useSelector((store) => store.user);
+  const {user} = useSelector((store) => store.user);
   const [navVisible, setNavVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const nameShort = user?.fullName?.split(" ");
+  console.log(user);
+  
 
   const logOutHandler = async () => {
     try {
@@ -73,7 +76,7 @@ const Header = () => {
 
       <div className="user-items">
         <ul>
-          {userDetails ? (
+          {user ? (
             <NavLink>
               <li className="user-icon" onClick={logOutHandler}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
@@ -87,12 +90,8 @@ const Header = () => {
             </NavLink>
           )}
 
-          {userDetails ? (
-            <li className="user-name">Hi, {userDetails.fullName}</li>
-          ) : (
-            ""
-          )}
-          {userDetails && (
+          {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
+          {user && (
             <NavLink>
               <li className="order-online">Cart</li>
             </NavLink>
@@ -132,19 +131,16 @@ const Header = () => {
           </div>
           <div className="mbl-user-items">
             <ul>
-              <NavLink>
-                <li className="user-icon">
-                  <FontAwesomeIcon icon={faUser} />
-                </li>
-              </NavLink>
-              <NavLink>
-                <li className="cart-icon">
-                  <FontAwesomeIcon icon={faCartShopping} />
-                </li>
-              </NavLink>
-              <NavLink>
-                <li className="order-online">Cart</li>
-              </NavLink>
+              {user ? (
+                <li className="user-name">Hi, {nameShort[0]}</li>
+              ) : (
+                ""
+              )}
+              {user && (
+                <NavLink>
+                  <li className="order-online">Cart</li>
+                </NavLink>
+              )}
             </ul>
           </div>
         </div>

@@ -6,7 +6,7 @@ import axios from "axios";
 import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
-  const user = useSelector((store) => store.user);
+  const { user, loading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const getCurrUser = async () => {
