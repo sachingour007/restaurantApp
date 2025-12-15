@@ -18,6 +18,7 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import RootLayout from "./components/RootLayout.jsx";
 import UserProtectRoute from "./routes/UserProtectRoute.jsx";
+import Cart from "./components/UserComponents/Cart.jsx";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
                 element={
                   <UserProtectRoute>
                     <TableBook />
+                  </UserProtectRoute>
+                }
+              />
+              <Route
+                path="/cart"
+                element={
+                  <UserProtectRoute>
+                    <Cart />
                   </UserProtectRoute>
                 }
               />

@@ -11,18 +11,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { removeUser } from "../../store/userSlice";
+import { clearBookings } from "../../store/tableBookingSlice";
 import { BASE_URL } from "../../constantFiles/baseURL";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  const {user} = useSelector((store) => store.user);
+  const { user } = useSelector((store) => store.user);
   const [navVisible, setNavVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const nameShort = user?.fullName?.split(" ");
-  console.log(user);
-  
 
   const logOutHandler = async () => {
     try {
@@ -32,6 +31,7 @@ const Header = () => {
         { withCredentials: true }
       );
       dispatch(removeUser());
+      dispatch(clearBookings());
       navigate("/login", { replace: true });
       toast.success("Logout Successfully");
     } catch (error) {
@@ -92,7 +92,7 @@ const Header = () => {
 
           {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
           {user && (
-            <NavLink>
+            <NavLink to={"/cart"}>
               <li className="order-online">Cart</li>
             </NavLink>
           )}
@@ -131,11 +131,7 @@ const Header = () => {
           </div>
           <div className="mbl-user-items">
             <ul>
-              {user ? (
-                <li className="user-name">Hi, {nameShort[0]}</li>
-              ) : (
-                ""
-              )}
+              {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
               {user && (
                 <NavLink>
                   <li className="order-online">Cart</li>

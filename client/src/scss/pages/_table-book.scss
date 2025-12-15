@@ -76,16 +76,39 @@
 .bookingDetails{ margin-bottom: 100px; 
   .secWrapper{@include wrapperMargin; border-top: 1px solid #999;
     h2{color: #000; font-family: $dancingFont; @include font36; font-weight: bold; margin: 20px 0 30px; }
-    .mainContainer{width: 100%;
-      .headings{display: flex; justify-content: space-between; align-items: center; border: 1px solid black;
-        span{width: 20%; text-align: center; @include font20; text-transform: uppercase; font-weight: 600; border-right: 1px solid #000; padding: 5px 0;
-          &:last-child{border: none;}
-        } 
-      }
-      .dataRow{display: flex; justify-content: space-between; align-items: center; border: 1px solid black; border-top: none;
-        span{width: 20%; text-align: center; @include font20; text-transform: uppercase; font-weight: 600; border-right: 1px solid #000; padding: 5px 0;
-          &:last-child{border: none;}
+    .mainContainer{width: 100%; display: flex; align-items: center; flex-flow: wrap; gap: 15px;
+      .detailCard{width: calc(25% - 12px); border: 1px solid #999; border-radius: 12px; padding: 20px; background-color: rgb(255 244 244);
+        .dateBox{display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 5px;
+          .date{font-size: 16px; font-weight: 600} 
+          .status{padding: 4px 10px; border-radius: 12px; font-size: 14px; font-weight: 600; background: #fff3cd; color: #856404; text-transform: capitalize;}
         }
+        .nameBox{display: flex; flex-flow: column; gap: 10px;
+          h4{@include font16; font-weight: 500; font-family: $openSans; letter-spacing: 0.5px; line-height: 140%; text-transform: capitalize}
+          p{@include font14; font-family:$openSans ; letter-spacing: 0.5px; line-height: 140%;}
+        }
+      }
+      .empty{@include font20; text-transform: capitalize; font-weight: 500; line-height: 140%; letter-spacing: 0.5px;}
+    }
+  }
+
+  @media  all and (max-width: 1440px) {
+    .secWrapper{
+      .mainContainer{
+        .detailCard{width: calc(33.33% - 10px);}
+      }
+    }
+  }
+  @media  all and (max-width: 1024px) {
+    .secWrapper{
+      .mainContainer{
+        .detailCard{width: calc(50% - 8px);}
+      }
+    }
+  }
+  @media  all and (max-width: 720px) {margin-bottom: 80px;
+    .secWrapper{
+      .mainContainer{
+        .detailCard{width: 100%;}
       }
     }
   }
