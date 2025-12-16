@@ -38,7 +38,7 @@ const Cart = () => {
                 <span>Subtotal</span>
                 <span>₹1174</span>
               </div>
-              <div className="billhead">
+              <div className="billSummary">
                 <span>GST (5%)</span>
                 <span>₹59</span>
               </div>
@@ -54,8 +54,8 @@ const Cart = () => {
               </div>
             </div>
             <div className="checkoutBtn">
-              <button className="">Proceed to Checkout</button>
-              <button className="">Continue Shopping</button>
+              <button className="paymentBtn">Proceed to Checkout</button>
+              <button className="shopingBtn">Continue Shopping</button>
             </div>
           </div>
         </div>
