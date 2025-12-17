@@ -1,8 +1,29 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { f9 } from "../../assets/index";
+import CartItemCard from "./CartItemCard";
+import axios from "axios";
+import { BASE_URL } from "../../constantFiles/baseURL";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../store/cartSlice";
+import { useEffect } from "react";
 
 const Cart = () => {
+  const { cartData } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+  const getCart = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/user/cart/my-cart", {
+        withCredentials: true,
+      });
+      dispatch(setCart(res.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCart();
+  }, []);
+  console.log(cartData);
+
   return (
     <section className="cartSection">
       <div className="wrapper">
@@ -11,25 +32,13 @@ const Cart = () => {
         </div>
         <div className="cartLayout">
           <div className="itemList">
-            <div className="card">
-              <div className="imgBox">
-                <img src={f9} alt="" />
-              </div>
-              <div className="details">
-                <div className="titleBox">
-                  <h3>Paneer Tikka</h3>
-                  <p>₹598/-</p>
-                </div>
-                <div className="priceBox">
-                  <FontAwesomeIcon icon={faTrashCan} size="xl"  />
-                  <div className="countBtns">
-                    <button>-</button> 
-                    <span>2</span>
-                    <button>+</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {cartData !== null ? (
+              cartData?.[0]?.item.map((el) => (
+                <CartItemCard key={el._id} cartDetails = {el} />
+              ))
+            ) : (
+              <p>No Data In Cart</p>
+            )}
           </div>
           <div className="orderSummaryBox">
             <h3 className="">Order Summary</h3>

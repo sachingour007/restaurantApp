@@ -9,7 +9,7 @@
           .imgBox{ width: 100px; background:rgba(248, 248, 13, 0.407); border-radius: 16px; padding: 10px;}
           .details{display: flex; align-items: center; justify-content: space-between; width: calc(100% - 150px);
             .titleBox{
-              h3{@include font20; line-height: 100%; letter-spacing: 0.5px; margin-bottom: 20px;}
+              h3{@include font20; line-height: 100%; letter-spacing: 0.5px; margin-bottom: 20px; text-transform: capitalize}
               p{@include font18; font-weight: 600;}
             }
             .priceBox {display: flex; flex-flow: column; align-items: center ;justify-content: space-between;
