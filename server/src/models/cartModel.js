@@ -14,6 +14,10 @@ const cartSchema = mongoose.Schema(
 					ref: "Menu",
 					required: true,
 				},
+				foodImg: {
+					type: String,
+					required: true,
+				},
 				foodName: {
 					type: String,
 					required: true,

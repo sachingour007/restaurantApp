@@ -32,7 +32,7 @@ cartRouter.post(
 	userAuth,
 	asyncHandler(async (req, res, next) => {
 		const userId = req.user._id;
-		const { foodId, foodName, price } = req.body;
+		const { foodId, foodImg, foodName, price } = req.body;
 
 		let cart = await Cart.findOne({ userId });
 
@@ -45,7 +45,7 @@ cartRouter.post(
 		if (existingItem) {
 			existingItem.quantity += 1;
 		} else {
-			cart.item.push({ foodId, foodName, price, quantity: 1 });
+			cart.item.push({ foodId, foodImg, foodName, price, quantity: 1 });
 		}
 
 		cart.calculateTotals();
