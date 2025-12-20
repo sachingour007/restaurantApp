@@ -13,12 +13,13 @@ const Homepage = () => {
   const getMenu = useMenuData();
   const navigate = useNavigate();
   const foodItems = useSelector((store) => store.menu);
-  
+
   const featureCard = (foodItems || []).filter(
     (item) => item.isFeature === true
   );
-  console.log(featureCard);
+  const OfferCards = (foodItems || []).filter((item) => item.discount > 0);
 
+  console.log(OfferCards);
 
   useEffect(() => {
     getMenu();
@@ -101,7 +102,15 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-      <OfferCard />
+      <section className="offerSection">
+        <div className="offerWrapper">
+          <div className="offerCardContainer">
+            {OfferCards.map((card) => (
+              <OfferCard key={card._id} {...card} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {featureCard && (
         <section className="menuSection homepageMenuSec">
@@ -114,7 +123,7 @@ const Homepage = () => {
                 <div className="tabContent">
                   <div className="allCards">
                     {featureCard.map((items) => {
-                      return <MenuCards key={items._id} {...items} />;
+                      return <MenuCards key={items._id} items={items} />;
                     })}
                   </div>
                 </div>

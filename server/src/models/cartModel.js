@@ -26,6 +26,14 @@ const cartSchema = mongoose.Schema(
 					type: Number,
 					required: true,
 				},
+				finalPrice: {
+					type: Number,
+					required: true,
+				},
+				foodDiscount: {
+					type: Number,
+					required: true,
+				},
 				quantity: {
 					type: Number,
 					min: 1,
@@ -34,6 +42,18 @@ const cartSchema = mongoose.Schema(
 			},
 		],
 		totalItems: {
+			type: Number,
+			default: 0,
+		},
+		subTotal: {
+			type: Number,
+			default: 0,
+		},
+		gstPrice: {
+			type: Number,
+			default: 5,
+		},
+		deliveryCharges: {
 			type: Number,
 			default: 0,
 		},
@@ -49,10 +69,14 @@ const cartSchema = mongoose.Schema(
 
 cartSchema.methods.calculateTotals = function () {
 	this.totalItems = this.item.reduce((sum, item) => sum + item.quantity, 0);
-	this.totalPrice = this.item.reduce(
-		(sum, item) => sum + item.price * item.quantity,
+	this.subTotal = this.item.reduce(
+		(sum, item) => sum + item.finalPrice * item.quantity,
 		0
 	);
+	this.gstPrice = Number(((this.subTotal * 5) / 100).toFixed(2));
+	this.deliveryCharges = this.subTotal + this.gstPrice > 500 ? 0 : 30;
+
+	this.totalPrice = this.subTotal + this.gstPrice + this.deliveryCharges;
 };
 
 const Cart = mongoose.model("Cart", cartSchema);

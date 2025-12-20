@@ -5,6 +5,7 @@ const { asyncHandler } = require("../utils/asyncHandler");
 const Cart = require("../models/cartModel");
 const { ApiResponse } = require("../utils/ApiResponse");
 const { ApiError } = require("../utils/ApiError");
+const Menu = require("../models/menuModel");
 
 /* Cart Initilazie */
 cartRouter.post(
@@ -32,20 +33,37 @@ cartRouter.post(
 	userAuth,
 	asyncHandler(async (req, res, next) => {
 		const userId = req.user._id;
-		const { foodId, foodImg, foodName, price } = req.body;
+		const { foodId } = req.body;
+
+		const food = await Menu.findById(foodId);
 
 		let cart = await Cart.findOne({ userId });
 
 		if (!cart) {
 			cart = await Cart.create({ userId, item: [] });
 		}
+
+		const finalPrice =
+			food.discount > 0
+				? food.price - (food.price * food.discount) / 100
+				: food.price;
+
 		const existingItem = cart.item.find(
 			(item) => item.foodId.toString() === foodId
 		);
+
 		if (existingItem) {
 			existingItem.quantity += 1;
 		} else {
-			cart.item.push({ foodId, foodImg, foodName, price, quantity: 1 });
+			cart.item.push({
+				foodId,
+				foodImg: food.foodImage,
+				foodName: food.foodName,
+				price: food.price,
+				finalPrice,
+				foodDiscount: food.discount,
+				quantity: 1,
+			});
 		}
 
 		cart.calculateTotals();
@@ -98,7 +116,7 @@ cartRouter.delete(
 		const foodId = req.params.foodId;
 
 		const cart = await Cart.findOne({ userId });
-		cart.item = cart.item.filter((item) => item.foodId !== foodId);
+		cart.item = cart.item.filter((item) => item.foodId.toString() !== foodId);
 
 		cart.calculateTotals();
 		await cart.save();

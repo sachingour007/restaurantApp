@@ -5,7 +5,7 @@
     }
     .cartLayout{display: flex; gap: 50px; align-items: flex-start;
       .itemList{width: 70%; 
-        .card{display: flex; align-items: flex-start; gap: 30px; border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        .card{display: flex; align-items: flex-start; gap: 30px; border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; margin-bottom: 20px;
           .imgBox{ width: 100px; background:rgba(248, 248, 13, 0.407); border-radius: 16px; padding: 10px;}
           .details{display: flex; align-items: center; justify-content: space-between; width: calc(100% - 150px);
             .titleBox{

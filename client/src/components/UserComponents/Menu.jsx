@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const Menu = ({ showTab }) => {
   const getMenu = useMenuData();
   const foodItems = useSelector((store) => store.menu);
+
   const menuCategories = [
     ...new Set((foodItems || []).map((item) => item.category)),
   ];
@@ -63,7 +64,7 @@ const Menu = ({ showTab }) => {
               <div className="tabContent">
                 <div className="allCards">
                   {filteredItems.map((items) => {
-                    return <MenuCards key={items._id} {...items} />;
+                    return <MenuCards key={items._id} items={items} />;
                   })}
                 </div>
               </div>
