@@ -9,19 +9,24 @@ const RootLayout = () => {
   const { user, loading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
+
   const getCurrUser = async () => {
-    if (user) {
-      return;
-    }
+    const hasCookie = document.cookie.includes("token");
+
+    if (!hasCookie) return;
+
     try {
       const userDetails = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
-      dispatch(addUser(userDetails.data.data));
-    } catch (error) {
-      if (error.response?.status === 401) {
-        dispatch(removeUser());
+      if (response.data.success) {
+        dispatch(addUser(response.data.data));
+      } else {
+        dispatch(addUser(null));
       }
+    } catch (error) {
+      console.log("Not authenticated");
+      dispatch(addUser(null));
     }
   };
 

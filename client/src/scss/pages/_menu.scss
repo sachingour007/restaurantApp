@@ -1,7 +1,9 @@
-.menuSection{padding-top: 150px; margin-bottom: 100px;
-    .menuWrapper{@include wrapper;
+.menuSection{margin-bottom: 200px;
+    .menuWrapper{@include wrapper; padding-top: 150px; 
         .secHeading{display: flex; justify-content: center; align-items: center; margin-bottom: 45px;
-            h2{@include font40; font-family: $dancingFont; font-weight: $fontW700; color: #000;}
+            h2{@include font40; font-family: $dancingFont; font-weight: $fontW700; color: #000; letter-spacing: 0.8px;
+                 &::after{content: ""; width: 40%; height: 2px; background: #000; display: block; margin-top: 10px; margin: 14px auto 0}
+            }
         }
         .contentContainer{ padding: 0 100px;
             .menuCardContainer{
@@ -14,7 +16,7 @@
                 }
                 .tabContent{
                     .allCards{display: flex; align-items: center; flex-flow: wrap; gap: 30px;
-                        .card{width: calc(33.33% - 20px); position: relative; border-radius: 15px; overflow: hidden; background: linear-gradient(to bottom, #f1f2f3 40px, #222831 25px); transition: all 0.8s ease;
+                        .card{width: calc(33.33% - 20px); position: relative; border-radius: 15px; overflow: hidden; background: linear-gradient(to bottom, #f1f2f3 40px, #222831 25px); transition: all 0.8s ease;position: relative;
                             .imgBox{background: #f1f2f3; display: flex; justify-content: center; align-items: center; height: 300px; border-radius:  0 0 0 45px; padding: 25px;
                                 img{width: 200px; height: 150px; transition: transform 0.3s ease-in-out;}
                             }
@@ -30,6 +32,7 @@
                                     }
                                 }
                             }
+                            .discountTag{background: #ff0000; color: #fff; border: 1px dashed #fff; padding: 5px; position: absolute; top: 0; right:0; font-weight: 500; opacity: 0.8;}
                             &:hover{
                                 .imgBox{img{transform: scale(1.5);}}
                             }
@@ -46,8 +49,8 @@
         }
     }
 
-    @media all and (max-width: 1800px){padding-top: 180px;
-        .menuWrapper{
+    @media all and (max-width: 1800px){
+        .menuWrapper{padding-top: 180px;
             .contentContainer{
                 .menuCardContainer{
                     .tabContent{
@@ -64,8 +67,8 @@
             }
         }
     }
-    @media all and (max-width: 1600px){padding-top: 140px;
-        .menuWrapper{
+    @media all and (max-width: 1600px){margin-bottom: 160px;
+        .menuWrapper{padding-top: 140px;
             .contentContainer{
                 .menuCardContainer{
                     .tabContent{
@@ -86,8 +89,8 @@
             }
         }
     }
-    @media all and (max-width: 1440px){padding-top: 120px;
-        .menuWrapper{
+    @media all and (max-width: 1440px){margin-bottom: 120px;
+        .menuWrapper{padding-top: 120px;
             .contentContainer{
                 .menuCardContainer{
                     .tabsList{
@@ -110,8 +113,8 @@
             }
         }
     }
-    @media all and (max-width: 1280px){padding-top: 100px;
-        .menuWrapper{
+    @media all and (max-width: 1280px){margin-bottom: 100px; 
+        .menuWrapper{padding-top: 100px;
             .contentContainer{
                 .menuCardContainer{
                     .tabContent{
@@ -161,7 +164,7 @@
             }
         }
     }
-    @media all and (max-width: 720px){
+    @media all and (max-width: 720px){margin-bottom: 80px;
         .menuWrapper{
             .secHeading{
                 h2{font-size: 30px;}

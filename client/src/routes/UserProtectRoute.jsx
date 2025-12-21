@@ -3,12 +3,9 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const UserProtectRoute = ({ children }) => {
-  const { user, loading } = useSelector((store) => store.user);
-  if (loading) {
-    return <div>loading...</div>;
-  }
+  const { user } = useSelector((store) => store.user);
 
-  if (!user?._id) {
+  if (user === null) {
     return <Navigate to="/login" replace />;
   }
   return children;

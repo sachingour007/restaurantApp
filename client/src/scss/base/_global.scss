@@ -357,7 +357,6 @@ template {
   box-sizing: border-box;
   line-height: 1.3;
   outline: none;
-  color: #18191F;
 }
 
 html,
@@ -671,4 +670,15 @@ $fontW900 : 900;
 
   .hideScrollbarhtml, .hideScrollbar {
     overflow: hidden !important;
+}
+
+.toastBody {
+  color: #fff !important;
+  font-size: 14px;
+}
+
+
+
+.toastProgress {
+  background: #fff !important;
 }

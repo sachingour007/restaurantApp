@@ -133,8 +133,8 @@ const Header = () => {
             <ul>
               {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
               {user && (
-                <NavLink>
-                  <li className="order-online">Cart</li>
+                <NavLink to={"/cart"}>
+                  <li className="order-online" onClick={() => setNavVisible(false)}>Cart</li>
                 </NavLink>
               )}
             </ul>

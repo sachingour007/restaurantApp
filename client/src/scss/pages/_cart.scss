@@ -5,7 +5,7 @@
     }
     .cartLayout{display: flex; gap: 50px; align-items: flex-start;
       .itemList{width: 70%; 
-        .card{display: flex; align-items: flex-start; gap: 30px; border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; margin-bottom: 20px;
+        .card{display: flex; align-items: center; gap: 30px; border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; margin-bottom: 20px;
           .imgBox{ width: 100px; background:rgba(248, 248, 13, 0.407); border-radius: 16px; padding: 10px;}
           .details{display: flex; align-items: center; justify-content: space-between; width: calc(100% - 150px);
             .titleBox{
@@ -13,7 +13,7 @@
               p{@include font18; font-weight: 600;}
             }
             .priceBox {display: flex; flex-flow: column; align-items: center ;justify-content: space-between;
-              svg{margin-bottom: 20px; cursor: pointer; 
+              svg{margin-bottom: 20px; cursor: pointer;
                 path{color: #ffbe33;  transition: 0.3s all ease-in-out;}
                 &:hover{path{color: rgb(255, 172, 0);;}}
               } 
@@ -33,13 +33,13 @@
       h3{@include font20; line-height: 100%; letter-spacing: 0.5px; margin-bottom: 20px;}
       .billBox{display: flex; flex-flow: column; gap: 10px; margin-bottom: 20px;
         .billSummary{display: flex; justify-content: space-between;
-          span{@include font16; line-height: 120%; letter-spacing: 0.5px; font-weight: 500; color: #6a6a6a;
+          span{@include font16; line-height: 140%; letter-spacing: 0.8px; font-weight: 500; color: #6a6a6a;
             &:last-child{font-weight: 600; color: #000;}
           }
         }
         .totalBox{border-top: 1px solid lightgray; padding-top: 10px;
           .innerTotalBox{display: flex; justify-content: space-between;
-             span{@include font16; line-height: 120%; letter-spacing: 0.5px; font-weight: 500; color: #6a6a6a;
+             span{@include font16; line-height: 140%; letter-spacing: 0.8px; font-weight: 500; color: #6a6a6a;
             &:last-child{font-weight: 600; color: #000;}
           }
           }
@@ -56,4 +56,72 @@
     }
     
   }
+
+  @media  all and (max-width: 1600px) {padding: 150px 0 100px;
+    .wrapper{
+      .cartLayout{
+        .itemList{width: 65%;
+          .card{padding: 16px; margin-bottom: 16px;}
+        }
+        .orderSummaryBox{width: 35%;}
+      }
+    }
+  }
+  @media  all and (max-width: 1280px) {padding: 130px 0 100px;
+    .wrapper{
+      .cartLayout{
+        .itemList{
+          .card{
+            .details{
+              .priceBox{
+                svg{
+                  &.fa-xl{font-size: 18px;}
+                }
+              }
+            }
+          }
+        }
+        .orderSummaryBox{width: 35%;}
+      }
+    }
+  }
+  @media  all and (max-width: 1080px) {padding: 130px 0 100px;
+    .wrapper{
+      .cartHeading{margin-bottom: 30px;}
+      .cartLayout{flex-flow: column;
+        .itemList{width: 100%;
+          .card{
+            .details{
+              .priceBox{
+                svg{
+                  &.fa-xl{font-size: 18px;}
+                }
+              }
+            }
+          }
+        }
+        .orderSummaryBox{width: 100%;}
+      }
+    }
+  }
+  @media  all and (max-width: 720px) {padding: 100px 0 80px;
+    .wrapper{
+      .cartLayout{gap: 30px;
+        .itemList{
+          .card{padding: 10px 20px 10px 15px;
+            .imgBox{width: 80px; padding: 8px;}
+            .details{width: calc(100% - 85px); flex-flow: wrap; align-items: flex-start; gap: 15px;
+              .titleBox{width: 100%;
+                h3{margin-bottom: 12px; font-size: 16px ;}
+              }
+              .priceBox{width: 100%; flex-flow: wrap; flex-direction: row-reverse; align-items: center;
+                svg{margin-bottom: 0;}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

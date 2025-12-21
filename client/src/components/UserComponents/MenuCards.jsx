@@ -8,7 +8,7 @@ import { BASE_URL } from "../../constantFiles/baseURL";
 import { toast } from "react-toastify";
 
 const MenuCards = ({ items }) => {
-  const { foodImage, foodName, description, price, _id } = items;
+  const { foodImage, foodName, description, price, _id, discount } = items;
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -48,6 +48,13 @@ const MenuCards = ({ items }) => {
           )}
         </div>
       </div>
+      {discount > 0 ? (
+        <div className="discountTag">
+          <p>{discount}% OFF</p>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

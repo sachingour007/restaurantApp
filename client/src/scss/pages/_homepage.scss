@@ -1,4 +1,4 @@
-.heroSection{position: relative;height: 100vh;
+.heroSection{position: relative;height: 100vh; margin-bottom: 200px;
     .heroWrapper{@include wrapper; height: 100%;
         .bg-box{position: absolute; top: 0;left: 0; width: 100%; height: 100%;
             img{width: 100%; height: 100%; object-fit: cover;}
@@ -9,7 +9,7 @@
                     h1{@include font60; font-family: $dancingFont; font-weight: $fontW700; margin-bottom: 15px; color: #fff;}
                     p{@include font16; color: #fff;font-weight: $fontW400; font-family: $openSans; margin-bottom: 20px; line-height: 160%;}
                     button{padding: 10px 45px; background: $primary1; color: #fff; border-radius: 45px; transition: all 0.3s; border: none;margin-top: 10px;   text-align: center; @include font20; font-family: $openSans; font-weight: $fontW500; cursor: pointer;
-                     &:hover{background: #e69c00;}
+                        &:hover{background: #e69c00;}
                     }
                 }
                 .slick-dots{position: unset; display: flex !important; align-items: center;
@@ -29,7 +29,7 @@
         }
     }
     @media all and (max-width: 1800px){}
-    @media all and (max-width: 1600px){
+    @media all and (max-width: 1600px){margin-bottom: 160px;
         .heroWrapper{
             .sliderhead{
                 .sliderContainer{padding: 40px 0 70px 0;
@@ -38,7 +38,7 @@
             }
         }
     }
-    @media all and (max-width: 1440px){
+    @media all and (max-width: 1440px){margin-bottom: 120px;
         .heroWrapper{
             .sliderhead{top: 250px;
                 .sliderContainer{
@@ -49,7 +49,7 @@
             }
         }
     }
-    @media all and (max-width: 1280px){
+    @media all and (max-width: 1280px){margin-bottom: 100px;
         .heroWrapper{
             .sliderhead{top: 180px;
                 .sliderContainer{padding: 40px 0 60px 0;
@@ -83,7 +83,7 @@
             }
         } 
     }
-    @media all and (max-width: 720px){
+    @media all and (max-width: 720px){margin-bottom: 80px;
         .heroWrapper{
             .sliderhead{
                 .sliderContainer{
@@ -106,5 +106,21 @@
                 }
             }
          } 
+    }
+}
+
+.homepageMenuSec{margin-bottom: 200px;
+    .menuWrapper{padding-top: 0 !important;}
+    @media all and (max-width: 1600px){margin-bottom: 160px;
+        .menuWrapper{padding-top: 0 !important;}
+    }
+    @media all and (max-width: 1440px){margin-bottom: 120px;
+        .menuWrapper{padding-top: 0 !important;}
+    }
+    @media all and (max-width: 1280px){margin-bottom: 100px;
+        .menuWrapper{padding-top: 0 !important;}
+    }
+    @media all and (max-width: 720px){margin-bottom: 80px;
+        .menuWrapper{padding-top: 0 !important;}
     }
 }

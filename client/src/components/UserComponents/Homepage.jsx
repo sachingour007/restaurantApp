@@ -8,6 +8,7 @@ import useMenuData from "../../hooks/useMenuData";
 import { useSelector } from "react-redux";
 import Menu from "./Menu";
 import MenuCards from "./MenuCards";
+import { hompageSectionTwo } from "../../assets";
 
 const Homepage = () => {
   const getMenu = useMenuData();
@@ -104,10 +105,24 @@ const Homepage = () => {
       </section>
       <section className="offerSection">
         <div className="offerWrapper">
+          <h2>Crafted with Love, Served with Flavor</h2>
           <div className="offerCardContainer">
-            {OfferCards.map((card) => (
+            {/* {OfferCards.map((card) => (
               <OfferCard key={card._id} {...card} />
-            ))}
+            ))} */}
+
+            <div className="textBox">
+              <p>
+                We believe great food starts with the finest ingredients and a
+                passion for perfection. From freshly baked pizzas to juicy
+                burgers and creamy pastas, every dish is prepared to give you a
+                memorable dining experience. Taste the quality, feel the
+                freshness, and enjoy food made just for you.
+              </p>
+            </div>
+            <div className="imgBox">
+              <img src={hompageSectionTwo} alt="img" />
+            </div>
           </div>
         </div>
       </section>

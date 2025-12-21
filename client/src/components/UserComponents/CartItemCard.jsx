@@ -5,6 +5,7 @@ import { BASE_URL } from "../../constantFiles/baseURL";
 import { useDispatch } from "react-redux";
 import { setCart } from "../../store/cartSlice";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const CartItemCard = ({ cartDetails }) => {
   const { foodId, foodImg, foodName, price, quantity, finalPrice } = cartDetails;
@@ -31,6 +32,7 @@ const CartItemCard = ({ cartDetails }) => {
         withCredentials: true,
       });
       dispatch(setCart(res.data.data));
+      toast.warning("food removed.")
     } catch (error) {
       console.log(error);
     }

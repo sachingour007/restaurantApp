@@ -19,7 +19,7 @@ footer{@include wrapper; padding-top: 50px; padding-bottom: 50px; background: #2
             h2{@include font30; color: #fff; font-family: $dancingFont; font-weight: $fontW600; margin-bottom: 20px;}
             .socialIcons{display: flex; gap: 10px;
                 a{width: 35px; height: 35px; background: #fff; border-radius: 100%; display: flex; align-items: center; justify-content: center;
-                    svg{@include font18;}
+                    svg{@include font18; color: #222831;}
                     &:hover{background: #ffbe33;
                         svg{path{fill: #fff;}}
                     }
