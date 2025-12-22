@@ -8,5 +8,4 @@ export { default as f7 } from "./images/f7.png";
 export { default as f8 } from "./images/f8.png";
 export { default as f9 } from "./images/f9.png";
 export { default as aboutImg } from "./images/about-img.png";
-export { default as cartBgImage } from "./images/cart-bg-image.jpg";
 export { default as hompageSectionTwo } from "./images/homepageSecTwo.webp";
