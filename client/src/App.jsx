@@ -1,5 +1,6 @@
 import react, { useEffect } from "react";
 import "./scss/main.scss";
+import 'swiper/css';
 import "leaflet/dist/leaflet.css";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import {
