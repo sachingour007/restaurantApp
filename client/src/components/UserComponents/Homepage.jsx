@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import heroBg from "../../assets/images/hero-bg.jpg";
-import Navbar from "./Header";
 import { Link, useNavigate } from "react-router-dom";
-import BannerSlider from "../SliderComponant/BannerSlider";
-import OfferCard from "./OfferCard";
 import useMenuData from "../../hooks/useMenuData";
 import { useSelector } from "react-redux";
-import Menu from "./Menu";
 import MenuCards from "./MenuCards";
 import { hompageSectionTwo } from "../../assets";
 import Testimonials from "./Testimonials";
@@ -36,70 +32,25 @@ const Homepage = () => {
           </div>
           <div className="sliderhead">
             <div className="sliderContainer">
-              <BannerSlider>
-                <div>
-                  <div className="contentContainer">
-                    <h1>Fast Food Restaurant</h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi,
-                      temporibus sapiente ad mollitia laborum quam quisquam esse
-                      error unde. Tempora ex doloremque, labore, sunt repellat
-                      dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div className="btn-box">
-                      <button
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Order Now
-                      </button>
-                    </div>
+              <div>
+                <div className="contentContainer">
+                  <h1>Fast Food Restaurant</h1>
+                  <p>
+                    From juicy burgers to perfectly crispy fries, we serve fast
+                    food made with quality ingredients and bold flavors. Quick
+                    service, great taste, and a meal you'll love every time.
+                  </p>
+                  <div className="btn-box">
+                    <button
+                      onClick={() => {
+                        navigate("/menu");
+                      }}
+                    >
+                      Order Now
+                    </button>
                   </div>
                 </div>
-
-                <div>
-                  <div className="contentContainer">
-                    <h1>Fast Food Restaurant</h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi,
-                      temporibus sapiente ad mollitia laborum quam quisquam esse
-                      error unde. Tempora ex doloremque, labore, sunt repellat
-                      dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div className="btn-box">
-                      <button
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Order Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="contentContainer">
-                    <h1>Fast Food Restaurant</h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi,
-                      temporibus sapiente ad mollitia laborum quam quisquam esse
-                      error unde. Tempora ex doloremque, labore, sunt repellat
-                      dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div className="btn-box">
-                      <button
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Order Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </BannerSlider>
+              </div>
             </div>
           </div>
         </div>
@@ -152,7 +103,7 @@ const Homepage = () => {
         </section>
       )}
 
-      <Testimonials/>
+      <Testimonials />
     </>
   );
 };
