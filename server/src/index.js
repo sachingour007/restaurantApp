@@ -1,6 +1,6 @@
+const dotenv = require("dotenv").config();
 const app = require("./app");
 const connectDB = require("./db/inddex");
-const dotenv = require("dotenv").config();
 
 connectDB()
 	.then(() => {
