@@ -8,19 +8,18 @@ import { Outlet } from "react-router-dom";
 const RootLayout = () => {
   const { user, loading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const getCurrUser = async () => {
-    const hasCookie = document.cookie.includes("token");
-
-    if (!hasCookie) return;
+    if (user) return;
 
     try {
       const userDetails = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
-      if (response.data.success) {
-        dispatch(addUser(response.data.data));
+      console.log(userDetails);
+
+      if (userDetails.data.success) {
+        dispatch(addUser(userDetails.data.data));
       } else {
         dispatch(addUser(null));
       }
