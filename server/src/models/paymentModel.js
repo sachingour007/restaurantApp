@@ -31,11 +31,14 @@ const paymentSchema = mongoose.Schema(
 			required: true,
 		},
 		notes: {
-			firstName: {
+			fullName: {
 				type: String,
 			},
-			lastName: {
+			email: {
 				type: String,
+			},
+			phone: {
+				type: Number,
 			},
 		},
 	},
