@@ -1,6 +1,18 @@
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv").config({ quiet: true });
 const app = require("./app");
 const connectDB = require("./db/inddex");
+
+// Vercel ke liye database connection
+connectDB().catch((err) => {
+	console.log("Database connection failed", err);
+});
+
+if (process.env.NODE_ENV !== "production") {
+	const PORT = process.env.PORT || 8080;
+	app.listen(PORT, () => {
+		console.log(`http://localhost:${PORT}`);
+	});
+}
 
 // connectDB()
 // 	.then(() => {
@@ -12,11 +24,4 @@ const connectDB = require("./db/inddex");
 // 		console.log("Server Not Wokring", err);
 // 	});
 
-(async () => {
-	try {
-		await connectDB();
-		console.log("✅ Database connected");
-	} catch (error) {
-		console.error("❌ DB connection failed", error);
-	}
-})();
+module.exports = app;
