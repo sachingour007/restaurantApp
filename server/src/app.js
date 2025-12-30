@@ -24,8 +24,8 @@ const { tableBookRouter } = require("./router/tableBookRouter");
 const { cartRouter } = require("./router/cartRouter");
 const { paymentRouter } = require("./router/payment");
 
-app.use("/", (req, res) => {
-	res.json("im Wokring on home Route ")
+app.get("/", (req, res) => {
+	res.send("Backend running on Vercel 🚀");
 });
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
