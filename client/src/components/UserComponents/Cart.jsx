@@ -22,10 +22,18 @@ const Cart = () => {
     }
   };
 
+  const checkoutHandler = async () => {
+    const res = await axios.post(BASE_URL + "/payment/create", cartData._id, {
+      withCredentials: true,
+    });
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   useEffect(() => {
     getCart();
   }, []);
-
 
   return (
     cartData && (
@@ -62,14 +70,14 @@ const Cart = () => {
                 <div className="totalBox">
                   <div className="innerTotalBox">
                     <span>Total</span>
-                    <span className="">
-                      ₹{cartData.totalPrice}/-
-                    </span>
+                    <span className="">₹{cartData.totalPrice}/-</span>
                   </div>
                 </div>
               </div>
               <div className="checkoutBtn">
-                <button className="paymentBtn">Proceed to Checkout</button>
+                <button className="paymentBtn" onClick={checkoutHandler}>
+                  Proceed to Checkout
+                </button>
                 <button
                   className="shopingBtn"
                   onClick={() => {

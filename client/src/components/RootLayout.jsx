@@ -1,6 +1,6 @@
 import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../store/userSlice.js";
+import { addUser, removeUser, setLoading } from "../store/userSlice.js";
 import { BASE_URL } from "../constantFiles/baseURL.js";
 import axios from "axios";
 import { Outlet } from "react-router-dom";
@@ -11,6 +11,8 @@ const RootLayout = () => {
 
   const getCurrUser = async () => {
     if (user) return;
+
+    dispatch(setLoading(true));
 
     try {
       const userDetails = await axios.get(`${BASE_URL}/user/profile`, {
