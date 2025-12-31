@@ -27,9 +27,8 @@ authRouter.post(
 
 		const token = await user.getJwt();
 		res.cookie("token", token, {
-			secure: true,
+			secure: false,
 			httpOnly: true,
-			sameSite: "none",
 			expires: new Date(Date.now() + 24 * 3600000),
 		});
 
@@ -60,9 +59,9 @@ authRouter.post(
 
 		const token = await userDetails.getJwt();
 		res.cookie("token", token, {
-			secure: true,
+			secure: false,
 			httpOnly: true,
-			sameSite: "none",
+
 			expires: new Date(Date.now() + 24 * 3600000),
 		});
 
