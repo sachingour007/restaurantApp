@@ -79,7 +79,7 @@ authRouter.post(
 	asyncHandler(async (req, res, next) => {
 		res.clearCookie("token", {
 			httpOnly: true,
-			secure: true,
+			secure: false,
 		});
 		res.status(200).json(new ApiResponse(200, "", "User logout successful!"));
 	})
