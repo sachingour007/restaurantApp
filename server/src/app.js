@@ -7,7 +7,10 @@ const cors = require("cors");
 //Middleware
 app.use(
 	cors({
-		origin: ["https://restaurant-app-aimx.vercel.app"],
+		origin: [
+			"https://restaurant-app-aimx.vercel.app",
+			"http://localhost:5173",
+		],
 		credentials: true,
 	})
 );
