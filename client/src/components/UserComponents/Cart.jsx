@@ -23,9 +23,34 @@ const Cart = () => {
   };
 
   const checkoutHandler = async () => {
-    const res = await axios.post(BASE_URL + "/payment/create", cartData._id, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      BASE_URL + "/payment/create",
+      { cartId: cartData._id },
+      {
+        withCredentials: true,
+      }
+    );
+
+    const { savedPayment, keyId } = res.data.data;
+
+    const options = {
+      key: keyId,
+      amount: savedPayment.amount,
+      currency: savedPayment.currency,
+      name: "Hot Cornor",
+      description: "Testy Fast Food",
+      order_id: savedPayment.orderId,
+      prefill: {
+        name: savedPayment.notes.fullName,
+        email: savedPayment.notes.email,
+        contact: savedPayment.notes.phone,
+      },
+      theme: {
+        color: "#F37254",
+      },
+    };
+
+    console.log(options)
 
     const rzp = new window.Razorpay(options);
     rzp.open();

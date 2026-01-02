@@ -38,7 +38,6 @@ const TableBook = () => {
       validationSchema: tableBooSchema,
       onSubmit: async (value, action) => {
         try {
-          console.log(value);
           const result = await bookingHandler(value);
           toast.success("Request has been submitted.");
           action.resetForm();

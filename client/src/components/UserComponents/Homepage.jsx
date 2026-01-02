@@ -15,10 +15,6 @@ const Homepage = () => {
   const featureCard = (foodItems || []).filter(
     (item) => item.isFeature === true
   );
-  const OfferCards = (foodItems || []).filter((item) => item.discount > 0);
-
-  console.log(OfferCards);
-
   useEffect(() => {
     getMenu();
   }, []);
@@ -78,7 +74,6 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-
       {featureCard && (
         <section className="menuSection homepageMenuSec">
           <div className="menuWrapper">

@@ -18,8 +18,6 @@ const RootLayout = () => {
       const userDetails = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
-      console.log(userDetails);
-
       if (userDetails.data.success) {
         dispatch(addUser(userDetails.data.data));
       } else {

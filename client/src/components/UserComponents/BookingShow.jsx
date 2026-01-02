@@ -21,7 +21,7 @@ const BookingShow = () => {
 
   useEffect(() => {
     getBookings();
-  }, []);
+  }, [bookingData]);
 
   return (
     <section className="bookingDetails">

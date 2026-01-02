@@ -21,7 +21,6 @@ const MenuCards = ({ items }) => {
       );
       dispatch(setCart(res.data.data));
       toast.success("food Added !!");
-      console.log("load");
     } catch (error) {
       console.log(error);
     }

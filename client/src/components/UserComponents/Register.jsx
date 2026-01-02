@@ -43,8 +43,13 @@ const Register = () => {
         try {
           const result = await userRegister(values);
           dispatch(addUser(result.data.data));
-          navigate("/");
+          await axios.post(
+            BASE_URL + "/user/cart/cartinit",
+            {},
+            { withCredentials: true }
+          );
           action.resetForm();
+          navigate("/");
           toast.success("Register SuccessFully.");
         } catch (error) {
           toast.error(error);
