@@ -11,8 +11,12 @@ const cartSlice = createSlice({
       state.cartData = action.payload;
       state.loading = false;
     },
+    resetCart: (state, action) => {
+      state.cartData = null;
+      state.loading = false
+    }
   },
 });
 
-export const { setCart } = cartSlice.actions;
+export const { setCart, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
