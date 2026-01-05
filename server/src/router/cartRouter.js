@@ -132,7 +132,7 @@ cartRouter.get(
 	userAuth,
 	asyncHandler(async (req, res, next) => {
 		const userId = req.user._id;
-		const cart = await Cart.find({ userId });
+		const cart = await Cart.findOne({ userId });
 		res.status(200).json(new ApiResponse(200, cart, "My cart fetched"));
 	})
 );

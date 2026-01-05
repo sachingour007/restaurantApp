@@ -1,0 +1,105 @@
+/* body scroll lock */
+body.modal-open {
+  overflow: hidden;
+}
+
+.thank-you {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0f172ae8;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
+  overflow: hidden;
+
+  &__card {
+    background: #020617;
+    color: #ffffff;
+    max-width: 420px;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #cbd5f5;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+/* Check icon */
+.checkmark {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  font-weight: bold;
+  color: #fff;
+
+  &.success {
+    background: #22c55e;
+  }
+
+  &.failed {
+    background: #ef4444;
+  }
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  .btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #f97316;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.2s;
+
+    &:hover {
+      background: #ea580c;
+    }
+  }
+}
+
+/* Animation */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .thank-you__card {
+    padding: 30px 20px;
+  }
+}

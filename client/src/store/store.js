@@ -3,6 +3,7 @@ import userSlice from "./userSlice";
 import menuSlice from "./menuSlice";
 import tableBookingSlice from "./tableBookingSlice";
 import cartSlice from "./cartSlice";
+import paymentSlice from "./paymentSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     menu: menuSlice,
     tableBooking: tableBookingSlice,
     cart: cartSlice,
+    payment: paymentSlice,
   },
 });
 

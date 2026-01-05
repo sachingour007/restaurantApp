@@ -113,4 +113,42 @@ paymentRouter.post(
 	})
 );
 
+paymentRouter.get(
+	"/payment/status/:orderId",
+	userAuth,
+	asyncHandler(async (req, res, next) => {
+		const { orderId } = req.params;
+		const payment = await Payment.findOne({ orderId: orderId });
+
+		if (!payment) {
+			return res
+				.status(200)
+				.json(
+					new ApiResponse(200, { status: "PENDING" }, "Payment Pending.")
+				);
+		}
+
+		if (payment.status === "SUCCESS") {
+			return res
+				.status(200)
+				.json(
+					new ApiResponse(200, { status: "SUCCESS" }, "Payment Sucess.")
+				);
+		}
+
+		// Payment failed
+		if (payment.status === "FAILED") {
+			return res
+				.status(200)
+				.json(
+					new ApiResponse(200, { status: "FAILED" }, "Payment Failed.")
+				);
+		}
+
+		return res
+			.status(200)
+			.json(new ApiResponse(200, { status: "PENDING" }, "Payment Pending."));
+	})
+);
+
 module.exports = { paymentRouter };

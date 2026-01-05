@@ -10,3 +10,4 @@ export { default as f9 } from "./images/f9.png";
 export { default as aboutImg } from "./images/about-img.png";
 export { default as hompageSectionTwo } from "./images/homepageSecTwo.webp";
 export { default as reviewBg } from "../assets/images/review-bg.jpg";
+export { default as rightMark } from "../assets/images/right-mark.png";

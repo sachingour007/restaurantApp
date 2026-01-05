@@ -25,7 +25,7 @@ const { userRouter } = require("./router/userRouter");
 const { menuRouter } = require("./router/menuRouter");
 const { tableBookRouter } = require("./router/tableBookRouter");
 const { cartRouter } = require("./router/cartRouter");
-const { paymentRouter } = require("./router/payment");
+const { paymentRouter } = require("./router/paymentRouter");
 
 app.get("/", (req, res) => {
 	res.send("Backend running on Vercel 🚀");
