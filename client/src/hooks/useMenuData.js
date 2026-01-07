@@ -8,7 +8,7 @@ const useMenuData = () => {
 
   const getMenu = async () => {
     try {
-      const menuData = await axios.get(BASE_URL + "/menuu", {
+      const menuData = await axios.get(BASE_URL + "/menu", {
         withCredentials: true,
       });
       dispatch(addMenu(menuData.data.data));
