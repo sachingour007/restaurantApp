@@ -74,7 +74,9 @@ cartSchema.methods.calculateTotals = function () {
 		0
 	);
 	this.gstPrice = Number(((this.subTotal * 5) / 100).toFixed(2));
-	this.deliveryCharges = this.subTotal + this.gstPrice > 500 ? 0 : 30;
+
+	this.deliveryCharges =
+		this.subTotal > 0 ? (this.subTotal + this.gstPrice > 500 ? 0 : 30) : 0;
 
 	this.totalPrice = this.subTotal + this.gstPrice + this.deliveryCharges;
 };

@@ -4,6 +4,7 @@ import { BASE_URL } from "../../constantFiles/baseURL";
 import { addBooking } from "../../store/tableBookingSlice";
 import { useEffect } from "react";
 import BookingCard from "./BookingCard";
+import BookingShimmerGrid from "../../shimmer Ui/BookingShimmerGrid";
 
 const BookingShow = () => {
   const { bookingData, loading } = useSelector((store) => store.tableBooking);
@@ -28,7 +29,9 @@ const BookingShow = () => {
       <div className="secWrapper">
         <h2>Booking Details</h2>
         <div className="mainContainer">
-          {bookingData !== null ? (
+          {loading ? (
+            <BookingShimmerGrid />
+          ) : bookingData.length > 0 ? (
             bookingData.map((details) => (
               <BookingCard key={details._id} {...details} />
             ))

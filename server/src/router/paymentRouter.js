@@ -98,7 +98,11 @@ paymentRouter.post(
 			paymentDBDetails.status = "SUCCESS";
 
 			await paymentDBDetails.save();
-			await Cart.deleteOne({ userId: paymentDBDetails.userId });
+
+			await Cart.findByIdAndUpdate({ userId: paymentDBDetails.userId }, {
+				item: [],
+				updatedAt: new Date()
+			});
 		}
 
 		// ❌ PAYMENT FAILED

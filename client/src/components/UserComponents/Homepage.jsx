@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import MenuCards from "./MenuCards";
 import { hompageSectionTwo } from "../../assets";
 import Testimonials from "./Testimonials";
+import MenuShimmer from "../../shimmer Ui/MenuShimmer";
 
 const Homepage = () => {
   const getMenu = useMenuData();
@@ -15,6 +16,7 @@ const Homepage = () => {
   const featureCard = (foodItems || []).filter(
     (item) => item.isFeature === true
   );
+
   useEffect(() => {
     getMenu();
   }, []);
@@ -74,29 +76,32 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-      {featureCard && (
-        <section className="menuSection homepageMenuSec">
-          <div className="menuWrapper">
-            <div className="secHeading">
-              <h2>Our Menu</h2>
-            </div>
-            <div className="contentContainer">
-              <div className="menuCardContainer">
-                <div className="tabContent">
+
+      <section className="menuSection homepageMenuSec">
+        <div className="menuWrapper">
+          <div className="secHeading">
+            <h2>Our Menu</h2>
+          </div>
+          <div className="contentContainer">
+            <div className="menuCardContainer">
+              <div className="tabContent">
+                {featureCard.length > 0 ? (
                   <div className="allCards">
                     {featureCard.map((items) => {
                       return <MenuCards key={items._id} items={items} />;
                     })}
                   </div>
-                </div>
-              </div>
-              <div className="viewMore">
-                <Link to={"/menu"}>View More</Link>
+                ) : (
+                  <MenuShimmer val={3} />
+                )}
               </div>
             </div>
+            <div className="viewMore">
+              <Link to={"/menu"}>View More</Link>
+            </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <Testimonials />
     </>

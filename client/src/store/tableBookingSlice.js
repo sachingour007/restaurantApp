@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const tableBookingSlice = createSlice({
   name: "tableBooking",
   initialState: {
-    bookingData: null,
+    bookingData: [],
     loading: true,
   },
   reducers: {

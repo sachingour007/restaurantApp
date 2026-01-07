@@ -5,6 +5,7 @@ import MenuCards from "./MenuCards";
 import { Link } from "react-router-dom";
 import useMenuData from "../../hooks/useMenuData";
 import { useSelector } from "react-redux";
+import MenuShimmer from "../../shimmer Ui/MenuShimmer";
 
 const Menu = ({ showTab }) => {
   const getMenu = useMenuData();
@@ -32,54 +33,56 @@ const Menu = ({ showTab }) => {
   }, []);
 
   return (
-    foodItems && (
-      <section className="menuSection">
-        <div className="menuWrapper">
-          <div className="secHeading">
-            <h2>Our Menu</h2>
-          </div>
-          <div className="contentContainer">
-            <div className="menuCardContainer">
-              {showTab && (
-                <div className="tabsList">
-                  <ul>
+    <section className="menuSection">
+      <div className="menuWrapper">
+        <div className="secHeading">
+          <h2>Our Menu</h2>
+        </div>
+        <div className="contentContainer">
+          <div className="menuCardContainer">
+            {showTab && (
+              <div className="tabsList">
+                <ul>
+                  <li
+                    onClick={() => foodHandler("all")}
+                    className={category === "all" ? "activeTab" : ""}
+                  >
+                    All
+                  </li>
+                  {menuCategories.map((cat) => (
                     <li
-                      onClick={() => foodHandler("all")}
-                      className={category === "all" ? "activeTab" : ""}
+                      onClick={() => foodHandler(cat)}
+                      key={cat}
+                      className={category === cat ? "activeTab" : ""}
                     >
-                      All
+                      {cat}
                     </li>
-                    {menuCategories.map((cat) => (
-                      <li
-                        onClick={() => foodHandler(cat)}
-                        key={cat}
-                        className={category === cat ? "activeTab" : ""}
-                      >
-                        {cat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <div className="tabContent">
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="tabContent">
+              {filteredItems.length > 0 ? (
                 <div className="allCards">
                   {filteredItems.map((items) => {
                     return <MenuCards key={items._id} items={items} />;
                   })}
                 </div>
-              </div>
+              ) : (
+                <MenuShimmer val={9} />
+              )}
             </div>
-            {!showTab ? (
-              <div className="viewMore">
-                <Link to={"/menu"}>View More</Link>
-              </div>
-            ) : (
-              ""
-            )}
           </div>
+          {!showTab ? (
+            <div className="viewMore">
+              <Link to={"/menu"}>View More</Link>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-      </section>
-    )
+      </div>
+    </section>
   );
 };
 

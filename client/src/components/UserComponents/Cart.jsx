@@ -2,7 +2,7 @@ import CartItemCard from "./CartItemCard";
 import axios from "axios";
 import { BASE_URL } from "../../constantFiles/baseURL";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart, resetCart } from "../../store/cartSlice";
+import { setCart, resetCart, setLoading } from "../../store/cartSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThankyouPage } from "./ThankyouPage";
@@ -11,16 +11,17 @@ import {
   setPaymentFailed,
   setPaymentPending,
 } from "../../store/paymentSlice";
+import CartShimmerList from "../../shimmer Ui/CartShimmerList";
 
 const Cart = () => {
   const { cartData, loading } = useSelector((store) => store.cart);
   const { showModal } = useSelector((store) => store.payment);
-  console.log(showModal);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const getCart = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(BASE_URL + "/user/cart/my-cart", {
         withCredentials: true,
@@ -28,6 +29,8 @@ const Cart = () => {
       dispatch(setCart(res.data.data));
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,69 +107,68 @@ const Cart = () => {
           <div className="cartHeading">
             <h1>Food Cart</h1>
           </div>
+          {loading && <CartShimmerList />}
 
-          <div className="cartLayout">
-            {cartData !== null ? (
+          {cartData && (
+            <div className="cartLayout">
               <div className="itemList">
-                {Array.isArray(item) && item.length > 0 ? (
+                {item.length > 0 ? (
                   item.map((el) => (
                     <CartItemCard key={el._id} cartDetails={el} />
                   ))
                 ) : (
-                  <p>No Data In Cart</p>
+                  <div className="emptyCartBox">
+                    <p>No Data In Cart !!</p>
+                    <button onClick={() => navigate("/menu")}>Add Foods</button>
+                  </div>
                 )}
               </div>
-            ) : (
-              <div className="itemList">
-                <p>No Data In Cart</p>
-              </div>
-            )}
 
-            <div className="orderSummaryBox">
-              <h3 className="">Order Summary</h3>
-              <div className="billBox">
-                <div className="billSummary">
-                  <span>Subtotal</span>
-                  <span>₹{cartData !== null ? subTotal : 0}/-</span>
-                </div>
-                <div className="billSummary">
-                  <span>GST (5%)</span>
-                  <span>₹{cartData !== null ? gstPrice : 0}/-</span>
-                </div>
-                <div className="billSummary">
-                  <span>Delivery Fee</span>
-                  <span>₹{cartData !== null ? deliveryCharges : 0}/-</span>
-                </div>
-                <div className="totalBox">
-                  <div className="innerTotalBox">
-                    <span>Total</span>
-                    <span className="">
-                      ₹{cartData !== null ? totalPrice : 0}/-
-                    </span>
+              <div className="orderSummaryBox">
+                <h3 className="">Order Summary</h3>
+                <div className="billBox">
+                  <div className="billSummary">
+                    <span>Subtotal</span>
+                    <span>₹{subTotal}/-</span>
+                  </div>
+                  <div className="billSummary">
+                    <span>GST (5%)</span>
+                    <span>₹{gstPrice}/-</span>
+                  </div>
+                  <div className="billSummary">
+                    <span>Delivery Fee</span>
+                    <span>₹{deliveryCharges}/-</span>
+                  </div>
+                  <div className="totalBox">
+                    <div className="innerTotalBox">
+                      <span>Total</span>
+                      <span className="">₹{totalPrice}/-</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="checkoutBtn">
-                <button
-                  className="paymentBtn"
-                  onClick={checkoutHandler}
-                  style={{
-                    pointerEvents: cartData === null ? "none" : "auto",
-                  }}
-                >
-                  Proceed to Checkout
-                </button>
-                <button
-                  className="shopingBtn"
-                  onClick={() => {
-                    navigate("/menu");
-                  }}
-                >
-                  Continue Shopping
-                </button>
+                <div className="checkoutBtn">
+                  <button
+                    className="paymentBtn"
+                    onClick={checkoutHandler}
+                    style={{
+                      pointerEvents:
+                        cartData.item.length === 0 ? "none" : "auto",
+                    }}
+                  >
+                    Proceed to Checkout
+                  </button>
+                  <button
+                    className="shopingBtn"
+                    onClick={() => {
+                      navigate("/menu");
+                    }}
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
       {showModal && <ThankyouPage />}

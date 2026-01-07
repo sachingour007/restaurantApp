@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const menuSlice = createSlice({
   name: "menu",
-  initialState: null,
+  initialState: [],
   reducers: {
     addMenu: (state, action) => {
       return action.payload;

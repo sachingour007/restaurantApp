@@ -115,16 +115,24 @@
         .menuWrapper{padding-top: 0 !important;}
     }
     @media all and (max-width: 1440px){margin-bottom: 120px;
-        .menuWrapper{padding-top: 0 !important;}
+        .menuWrapper{padding-top: 0 !important;
+            .contentContainer{padding: 0 50px !important;}
+        
+        }
     }
     @media all and (max-width: 1280px){margin-bottom: 100px;
         .menuWrapper{padding-top: 0 !important;}
+    }
+      @media all and (max-width: 1440px){
+        .menuWrapper{
+            .contentContainer{padding: 0 !important;}
+        
+        }
     }
     @media all and (max-width: 720px){margin-bottom: 80px;
         .menuWrapper{padding-top: 0 !important;}
     }
 }
-
 
 .testimonialSec{margin-bottom: 200px; background-size: cover;background-repeat: no-repeat; background-position: center;
     .wrapper{@include wrapper; padding-top: 120px; padding-bottom: 120px;

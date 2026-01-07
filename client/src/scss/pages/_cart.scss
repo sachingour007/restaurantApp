@@ -28,6 +28,10 @@
             }
           }
         }
+        .emptyCartBox{
+          p{ @include font20; font-weight: 600; letter-spacing: 0.8px; line-height: 140%; margin-bottom: 10px;}
+          button{padding: 5px 10px; border-radius: 5px; background-color: #ffbe33; color: #fff; @include font18; cursor: pointer; }
+        }
       }
      .orderSummaryBox{width: 30%; background: #fff; padding: 20px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;border-radius: 12px;
       h3{@include font20; line-height: 100%; letter-spacing: 0.5px; margin-bottom: 20px;}
