@@ -99,7 +99,7 @@ paymentRouter.post(
 
 			await paymentDBDetails.save();
 
-			await Cart.findByIdAndUpdate(
+			await Cart.findOneAndUpdate(
 				{ userId: paymentDBDetails.userId },
 				{
 					$set: {
