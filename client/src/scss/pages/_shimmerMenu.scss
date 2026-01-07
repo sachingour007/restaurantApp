@@ -1,5 +1,33 @@
 .shimmer-grid {display: grid;grid-template-columns: repeat(3, 1fr);gap: 30px;
-  @media (max-width: 992px) {
+
+  .shimmer-card {width: 100%;max-width: 350px;border-radius: 20px;overflow: hidden;background: #1f2933;
+  
+  
+    .shimmer-img {height: 200px;width: auto; background: #f2f2f2; border-bottom-left-radius: 24px;}
+    .shimmer-content {padding: 20px;}
+    .shimmer-title {height: 20px;width: 70%;margin-bottom: 14px;}
+    .shimmer-line {height: 14px;width: 100%;margin-bottom: 10px;
+      &.small {width: 60%;}
+    }
+    .shimmer-price {height: 16px;width: 30%;margin-top: 16px;}
+  
+    /* 🔥 Shimmer Animation */
+    .shimmer {position: relative;overflow: hidden;background: #e0e0e0;
+      &::after {content: "";position: absolute;top: 0;left: -150px;height: 100%;width: 150px;
+        background: linear-gradient(90deg,transparent,rgba(255, 255, 255, 0.6),transparent);
+        animation: shimmer 1.5s infinite;
+      }
+    }
+    @keyframes shimmer {
+      0% {
+        left: -150px;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  }
+    @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 576px) {
@@ -10,118 +38,101 @@
 
 //MenuCard SCSS
 
-.shimmer-card {width: 100%;max-width: 350px;border-radius: 20px;overflow: hidden;background: #1f2933;}
-.shimmer-img {height: 200px;background: #f2f2f2;border-bottom-left-radius: 24px;}
-.shimmer-content {padding: 20px;}
-.shimmer-title {height: 20px;width: 70%;margin-bottom: 14px;}
-.shimmer-line {height: 14px;width: 100%;margin-bottom: 10px;
-  &.small {width: 60%;}
-}
-.shimmer-price {height: 16px;width: 30%;margin-top: 16px;}
 
-/* 🔥 Shimmer Animation */
-.shimmer {position: relative;overflow: hidden;background: #e0e0e0;
-  &::after {content: "";position: absolute;top: 0;left: -150px;height: 100%;width: 150px;
-    background: linear-gradient(90deg,transparent,rgba(255, 255, 255, 0.6),transparent);
-    animation: shimmer 1.5s infinite;
-  }
-}
-@keyframes shimmer {
-  0% {
-    left: -150px;
-  }
-  100% {
-    left: 100%;
-  }
-}
 
 
 //BookCard Ui
 
 .booking-shimmer-grid {display: grid;grid-template-columns: repeat(4, 1fr);gap: 24px;
+  .booking-shimmer-card {background: #fff4f4;border-radius: 16px;padding: 20px;border: 1px solid #ddd;
+    .booking-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 18px;}
+
+    .shimmer-date {width: 120px;height: 16px;}
+
+    .shimmer-status {width: 80px;height: 24px;border-radius: 12px;}
+
+    .booking-body {display: flex;flex-direction: column;gap: 12px;}
+
+    .shimmer-line {height: 14px;width: 100%;
+      &.small {width: 60%;}
+    }
+
+    /* 🔥 Shimmer Effect */
+    .shimmer {background: #e0e0e0;position: relative;overflow: hidden;border-radius: 6px;
+      &::after {content: "";position: absolute;top: 0;left: -150px;width: 150px;height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shimmer 1.5s infinite;
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -150px;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  }
   @media (max-width: 820px) {grid-template-columns: repeat(2, 1fr);}
   @media (max-width: 720px) {grid-template-columns: repeat(1, 1fr);}
 }
-.booking-shimmer-card {background: #fff4f4;border-radius: 16px;padding: 20px;border: 1px solid #ddd;}
-.booking-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 18px;}
 
-.shimmer-date {width: 120px;height: 16px;}
-
-.shimmer-status {width: 80px;height: 24px;border-radius: 12px;}
-
-.booking-body {display: flex;flex-direction: column;gap: 12px;}
-
-.shimmer-line {height: 14px;width: 100%;
-  &.small {width: 60%;}
-}
-
-/* 🔥 Shimmer Effect */
-.shimmer {background: #e0e0e0;position: relative;overflow: hidden;border-radius: 6px;
-  &::after {content: "";position: absolute;top: 0;left: -150px;width: 150px;height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.6),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    left: -150px;
-  }
-  100% {
-    left: 100%;
-  }
-}
 
 
 //Shimmer Cart SCSS
 
-.cart-shimmer-card {background: #ffffff;border-radius: 14px;padding: 16px 20px;margin-bottom: 18px;display: flex;justify-content: space-between;align-items: center;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);}
+.cart-shimmer-card {background: #ffffff;border-radius: 14px;padding: 16px 20px;margin-bottom: 18px;display: flex;justify-content: space-between;align-items: center;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-/* LEFT */
-.left {display: flex;gap: 16px;align-items: center;}
+      /* LEFT */
+    .left {display: flex;gap: 16px;align-items: center;}
 
-.shimmer-img {width: 70px;height: 70px;border-radius: 12px;}
+    .shimmer-img {width: 70px;height: 70px;border-radius: 12px;}
 
-.shimmer-info {display: flex;flex-direction: column;gap: 10px;}
+    .shimmer-info {display: flex;flex-direction: column;gap: 10px;}
 
-.shimmer-title {width: 180px;height: 18px;}
+    .shimmer-title {width: 180px;height: 18px;}
 
-.shimmer-price {width: 80px;height: 14px;}
+    .shimmer-price {width: 80px;height: 14px;}
 
-/* RIGHT */
-.right {display: flex;align-items: center;gap: 20px;}
+    /* RIGHT */
+    .right {display: flex;align-items: center;gap: 20px;}
 
-.shimmer-trash {width: 22px;height: 22px;border-radius: 4px;}
+    .shimmer-trash {width: 22px;height: 22px;border-radius: 4px;}
 
-.shimmer-qty {display: flex;align-items: center;gap: 10px;}
+    .shimmer-qty {display: flex;align-items: center;gap: 10px;}
 
-.shimmer-btn {width: 28px;height: 28px;border-radius: 50%;}
+    .shimmer-btn {width: 28px;height: 28px;border-radius: 50%;}
 
-.shimmer-count {width: 24px;height: 16px;}
+    .shimmer-count {width: 24px;height: 16px;}
 
-/* 🔥 SHIMMER EFFECT */
-.shimmer {background: #e0e0e0;position: relative;overflow: hidden;
-  &::after {content: "";position: absolute;inset: 0;transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.6),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-  }
+
+    .shimmer {background: #e0e0e0;position: relative;overflow: hidden;
+      &::after {content: "";position: absolute;inset: 0;transform: translateX(-100%);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shimmer 1.5s infinite;
+      }
+    }
+    @keyframes shimmer {
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shimmer-title {width: 120px;}
+    }
+
 }
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
-/* 📱 Responsive */
-@media (max-width: 720px) {
-  .shimmer-title {width: 120px;}
-}
+
+

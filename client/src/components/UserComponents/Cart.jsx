@@ -53,7 +53,6 @@ const Cart = () => {
       const paymentStatus = res.data.data.status;
       if (paymentStatus === "SUCCESS") {
         dispatch(setPaymentSuccess());
-        dispatch(resetCart());
       } else if (paymentStatus === "FAILED") {
         dispatch(setPaymentFailed());
       } else {
