@@ -99,10 +99,16 @@ paymentRouter.post(
 
 			await paymentDBDetails.save();
 
-			await Cart.findByIdAndUpdate({ userId: paymentDBDetails.userId }, {
-				item: [],
-				updatedAt: new Date()
-			});
+			await Cart.findByIdAndUpdate(
+				{ userId: paymentDBDetails.userId },
+				{
+					$set: {
+						item: [],
+						updatedAt: new Date(),
+					},
+				},
+				{ new: true }
+			);
 		}
 
 		// ❌ PAYMENT FAILED
