@@ -104,6 +104,11 @@ paymentRouter.post(
 				{
 					$set: {
 						item: [],
+						totalItems: 0,
+						subTotal: 0,
+						gstPrice: 0,
+						deliveryCharges: 0,
+						totalPrice: 0,
 						updatedAt: new Date(),
 					},
 				},
