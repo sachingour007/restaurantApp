@@ -10,6 +10,7 @@ const Payment = require("../models/paymentModel");
 const {
 	validateWebhookSignature,
 } = require("razorpay/dist/utils/razorpay-utils");
+const Order = require("../models/orderModel");
 
 paymentRouter.post(
 	"/payment/create",
@@ -98,6 +99,42 @@ paymentRouter.post(
 			paymentDBDetails.status = "SUCCESS";
 
 			await paymentDBDetails.save();
+
+			const cart = await Cart.findOne({ userId: paymentDBDetails.userId });
+
+			if (!cart || cart.item.length === 0) {
+				throw new ApiError("Cart is empty, cannot create order");
+			}
+
+			const orderItems = cart.item.map((item) => ({
+				foodId: item.foodId,
+				foodImg: item.foodImg,
+				foodName: item.foodName,
+				foodDiscount: item.foodDiscount,
+				finalPrice: item.finalPrice,
+				quantity: item.quantity,
+			}));
+
+			const orderDetails = await Order.create({
+				userId: paymentDBDetails.userId,
+				orderId: paymentDBDetails.orderId,
+				items: orderItems,
+				pricing: {
+					subTotal: cart.subTotal,
+					gstPrice: cart.gstPrice,
+					deliveryCharges: cart.deliveryCharges,
+					otalPrice: cart.otalPrice,
+				},
+				payment: {
+					status: paymentDBDetails.status,
+				},
+				orderStatus: "DELIVERED",
+				deliveryDetails: {
+					fullName: paymentDBDetails.notes.fullName,
+					email: paymentDBDetails.notes.email,
+					phone: paymentDBDetails.notes.phone,
+				},
+			});
 
 			await Cart.findOneAndUpdate(
 				{ userId: paymentDBDetails.userId },
