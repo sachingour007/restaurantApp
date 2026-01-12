@@ -1,11 +1,11 @@
 header{display: flex; justify-content: space-between; align-items: center; @include wrapper;position: absolute; top: 0; left: 0; width: 100%; height: 100px; z-index: 9; background: #222831;
     .logoName{position: relative; z-index: 9;
-        span{color: #fff; font-family: $dancingFont; @include font48; font-weight: $fontW500;}
+        span{color: #fff; font-family: $dancingFont; font-weight: $fontW500; @include font48;}
     }
     .navbar-link{padding-left: 20%;
         ul{display: flex; flex-flow: wrap;
             a{
-                li{padding: 5px 20px; color: #fff; text-align: center; text-transform: uppercase; @include font20; font-family: $openSans; font-weight: $fontW500; 
+                li{padding: 5px 20px; color: #fff; text-align: center; text-transform: uppercase; font-family: $openSans; font-weight: $fontW500; @include font20;
                     &:hover{color: $primary1;}
                 }
                 &.active{li{color: #e69c00;}}
@@ -29,8 +29,9 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
                 }
                 &:hover{svg{path{fill: #e69c00;}}}
             }
-            .order-online{padding: 8px 30px; background: $primary1; border-radius: 45px; transition: all 0.3s; border: none;
+            .order-online{padding: 8px 30px; background: $primary1; border-radius: 45px; transition: all 0.3s; border: none; position: relative;
                 &:hover{background: #e69c00;}
+                  & .cartCounter{position: absolute; top: -50%; transform: translateY(50%); right: -3px; background:#ffffff; border-radius: 100%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; color: #ffaf03; }
             }
         }
     }

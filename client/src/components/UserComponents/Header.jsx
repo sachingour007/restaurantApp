@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const { user } = useSelector((store) => store.user);
+  const { cartData } = useSelector((store) => store.cart);
   const [navVisible, setNavVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,6 +72,9 @@ const Header = () => {
           <NavLink to={"/book-table"}>
             <li>Book Table</li>
           </NavLink>
+          {/* <NavLink to={"/orders"}>
+            <li>My Orders</li>
+          </NavLink> */}
         </ul>
       </div>
 
@@ -93,7 +97,14 @@ const Header = () => {
           {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
           {user && (
             <NavLink to={"/cart"}>
-              <li className="order-online">Cart</li>
+              <li className="order-online">
+                Cart
+                {cartData?.item?.length > 0 ? (
+                  <span className="cartCounter">{cartData?.item?.length}</span>
+                ) : (
+                  ""
+                )}
+              </li>
             </NavLink>
           )}
         </ul>
@@ -134,7 +145,12 @@ const Header = () => {
               {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
               {user && (
                 <NavLink to={"/cart"}>
-                  <li className="order-online" onClick={() => setNavVisible(false)}>Cart</li>
+                  <li
+                    className="order-online"
+                    onClick={() => setNavVisible(false)}
+                  >
+                    Cart
+                  </li>
                 </NavLink>
               )}
             </ul>

@@ -123,7 +123,7 @@ paymentRouter.post(
 					subTotal: cart.subTotal,
 					gstPrice: cart.gstPrice,
 					deliveryCharges: cart.deliveryCharges,
-					otalPrice: cart.otalPrice,
+					totalPrice: cart.totalPrice,
 				},
 				payment: {
 					status: paymentDBDetails.status,
