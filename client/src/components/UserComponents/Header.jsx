@@ -14,6 +14,7 @@ import { removeUser } from "../../store/userSlice";
 import { clearBookings } from "../../store/tableBookingSlice";
 import { BASE_URL } from "../../constantFiles/baseURL";
 import { toast } from "react-toastify";
+import useCartData from "../../hooks/useCartData";
 
 const Header = () => {
   const { user } = useSelector((store) => store.user);
@@ -54,15 +55,15 @@ const Header = () => {
     <header>
       <div className="logoName">
         <NavLink to={"/"}>
-          <span>Hot Cornor</span>
+          <span onClick={() => setNavVisible(false)}>Hot Cornor</span>
         </NavLink>
       </div>
 
       <div className="navbar-link">
         <ul>
-          <NavLink to={"/"}>
+          {/* <NavLink to={"/"}>
             <li>Home</li>
-          </NavLink>
+          </NavLink> */}
           <NavLink to={"/menu"}>
             <li>Menu</li>
           </NavLink>
@@ -72,9 +73,11 @@ const Header = () => {
           <NavLink to={"/book-table"}>
             <li>Book Table</li>
           </NavLink>
-          {/* <NavLink to={"/orders"}>
-            <li>My Orders</li>
-          </NavLink> */}
+          {user && (
+            <NavLink to={"/orders"}>
+              <li>My Orders</li>
+            </NavLink>
+          )}
         </ul>
       </div>
 
@@ -122,6 +125,7 @@ const Header = () => {
           <FontAwesomeIcon icon={faBarsStaggered} />
         )}
       </div>
+
       {navVisible && (
         <div className="mblheaderContainer">
           <div className="mbl-navbar-link">
@@ -138,6 +142,11 @@ const Header = () => {
               <NavLink to={"/book-table"}>
                 <li onClick={() => setNavVisible(false)}>Book Table</li>
               </NavLink>
+              {user && (
+                <NavLink to={"/orders"}>
+                  <li onClick={() => setNavVisible(false)}>My Orders</li>
+                </NavLink>
+              )}
             </ul>
           </div>
           <div className="mbl-user-items">
@@ -150,6 +159,13 @@ const Header = () => {
                     onClick={() => setNavVisible(false)}
                   >
                     Cart
+                    {cartData?.item?.length > 0 ? (
+                      <span className="cartCounter">
+                        {cartData?.item?.length}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </li>
                 </NavLink>
               )}

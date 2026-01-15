@@ -104,8 +104,9 @@ header{display: flex; justify-content: space-between; align-items: center; @incl
                         }
                         &:hover{svg{path{fill: #e69c00;}}}
                     }
-                    .order-online{padding: 8px 30px; background: $primary1; border-radius: 45px; transition: all 0.3s; border: none;
+                    .order-online{padding: 8px 30px; background: $primary1; border-radius: 45px; transition: all 0.3s; border: none; position: relative;
                         &:hover{background: #e69c00;}
+                        & .cartCounter{position: absolute; top: -50%; transform: translateY(50%); right: -3px; background:#ffffff; border-radius: 100%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; color: #ffaf03; }
                     }
                 }
             }

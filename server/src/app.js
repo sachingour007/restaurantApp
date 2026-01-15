@@ -26,6 +26,7 @@ const { menuRouter } = require("./router/menuRouter");
 const { tableBookRouter } = require("./router/tableBookRouter");
 const { cartRouter } = require("./router/cartRouter");
 const { paymentRouter } = require("./router/paymentRouter");
+const orderRouter = require("./router/orderRouter");
 
 app.get("/", (req, res) => {
 	res.send("Backend running on Vercel 🚀");
@@ -35,6 +36,7 @@ app.use("/user", userRouter);
 app.use("/menu", menuRouter);
 app.use("/table-booking", tableBookRouter);
 app.use("/user/cart", cartRouter);
+app.use("/orders", orderRouter);
 app.use("/", paymentRouter);
 
 app.use(errorMiddleware);

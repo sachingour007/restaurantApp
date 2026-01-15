@@ -2,7 +2,6 @@ import CartItemCard from "./CartItemCard";
 import axios from "axios";
 import { BASE_URL } from "../../constantFiles/baseURL";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart, resetCart, setLoading } from "../../store/cartSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThankyouPage } from "./ThankyouPage";
@@ -19,20 +18,6 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const getCart = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(BASE_URL + "/user/cart/my-cart", {
-        withCredentials: true,
-      });
-      dispatch(setCart(res.data.data));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const {
     _id,
@@ -71,9 +56,7 @@ const Cart = () => {
         withCredentials: true,
       }
     );
-
     const { savedPayment, keyId } = res.data.data;
-
     const options = {
       key: keyId,
       amount: savedPayment.amount,
@@ -95,9 +78,6 @@ const Cart = () => {
     rzp.open();
   };
 
-  useEffect(() => {
-    getCart();
-  }, []);
 
   return (
     <>

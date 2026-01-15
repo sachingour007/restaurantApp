@@ -20,6 +20,7 @@ import store from "./store/store.js";
 import RootLayout from "./components/RootLayout.jsx";
 import UserProtectRoute from "./routes/UserProtectRoute.jsx";
 import Cart from "./components/UserComponents/Cart.jsx";
+import Orders from "./components/UserComponents/Orders.jsx";
 
 function App() {
   return (
@@ -53,6 +54,14 @@ function App() {
                 element={
                   <UserProtectRoute>
                     <Cart />
+                  </UserProtectRoute>
+                }
+              />
+              <Route
+                path="/orders"
+                element={
+                  <UserProtectRoute>
+                    <Orders />
                   </UserProtectRoute>
                 }
               />

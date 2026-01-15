@@ -4,6 +4,7 @@ import menuSlice from "./menuSlice";
 import tableBookingSlice from "./tableBookingSlice";
 import cartSlice from "./cartSlice";
 import paymentSlice from "./paymentSlice";
+import orderSlice from "./orderSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     tableBooking: tableBookingSlice,
     cart: cartSlice,
     payment: paymentSlice,
+    orders: orderSlice,
   },
 });
 

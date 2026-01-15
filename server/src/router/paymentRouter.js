@@ -24,10 +24,12 @@ paymentRouter.post(
 			return new ApiError(400, "Cart not found");
 		}
 
+		const receiptId = `order_rcpt_${_id}_${Date.now()}`;
+
 		const order = await instance.orders.create({
 			amount: Math.round(Number(cart.totalPrice.toFixed(2)) * 100),
 			currency: "INR",
-			receipt: "order_rcptid_01",
+			receipt: receiptId,
 			notes: {
 				fullName,
 				email,
