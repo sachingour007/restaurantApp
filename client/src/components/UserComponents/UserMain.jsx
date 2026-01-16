@@ -11,9 +11,11 @@ function UserMain() {
   const getOrders = useOrderData();
 
   useEffect(() => {
-    getCart();
-    getOrders();
-  }, []);
+    if (user) {
+      getCart();
+      getOrders();
+    }
+  }, [user]);
   if (loading) return null;
   return (
     <>
