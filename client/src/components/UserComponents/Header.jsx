@@ -152,7 +152,7 @@ const Header = () => {
           <div className="mbl-user-items">
             <ul>
               {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
-              {user && (
+              {user ? (
                 <NavLink to={"/cart"}>
                   <li
                     className="order-online"
@@ -166,6 +166,15 @@ const Header = () => {
                     ) : (
                       ""
                     )}
+                  </li>
+                </NavLink>
+              ) : (
+                <NavLink to={"/login"}>
+                  <li
+                    className="user-icon"
+                    onClick={() => setNavVisible(false)}
+                  >
+                    <FontAwesomeIcon icon={faUser} />
                   </li>
                 </NavLink>
               )}
