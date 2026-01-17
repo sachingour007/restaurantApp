@@ -1,28 +1,16 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../../constantFiles/baseURL";
-import { addBooking } from "../../store/tableBookingSlice";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import BookingCard from "./BookingCard";
 import BookingShimmerGrid from "../../shimmer Ui/BookingShimmerGrid";
+import useBookingData from "../../hooks/useBookingData";
 
 const BookingShow = () => {
   const { bookingData, loading } = useSelector((store) => store.tableBooking);
-  const dispatch = useDispatch();
-  const getBookings = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "/table-booking/myBooking", {
-        withCredentials: true,
-      });
-      dispatch(addBooking(res.data.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const getBookings = useBookingData();
 
   useEffect(() => {
     getBookings();
-  }, [bookingData]);
+  }, []);
 
   return (
     <section className="bookingDetails">

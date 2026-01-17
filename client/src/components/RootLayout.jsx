@@ -10,7 +10,10 @@ const RootLayout = () => {
   const dispatch = useDispatch();
 
   const getCurrUser = async () => {
-    if (user) return;
+    if (user) {
+      dispatch(setLoading(false));
+      return;
+    }
 
     dispatch(setLoading(true));
 
@@ -18,7 +21,7 @@ const RootLayout = () => {
       const userDetails = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
-      
+
       if (userDetails.data.success) {
         dispatch(addUser(userDetails.data.data));
       } else {
@@ -27,12 +30,14 @@ const RootLayout = () => {
     } catch (error) {
       console.log("Not authenticated");
       dispatch(addUser(null));
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
     getCurrUser();
-  }, [user, dispatch]);
+  }, []);
 
   return <Outlet />;
 };

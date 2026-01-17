@@ -78,7 +78,6 @@ const Cart = () => {
     rzp.open();
   };
 
-
   return (
     <>
       <section className="cartSection">

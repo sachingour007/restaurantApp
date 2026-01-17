@@ -38,13 +38,22 @@ export const ThankyouPage = () => {
 
         <div className="actions">
           {isSuccess ? (
-            <Link
-              to="/menu"
-              className="btn"
-              onClick={() => dispatch(resetPayment())}
-            >
-              Order More
-            </Link>
+            <>
+              <Link
+                to="/menu"
+                className="btn"
+                onClick={() => dispatch(resetPayment())}
+              >
+                Order More
+              </Link>
+              <Link
+                to="/orders"
+                className="btn"
+                onClick={() => dispatch(resetPayment())}
+              >
+                Check Orders
+              </Link>
+            </>
           ) : (
             <Link
               to="/cart"

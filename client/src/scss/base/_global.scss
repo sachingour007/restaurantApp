@@ -363,6 +363,7 @@ html,
 body {
   background: #ffffff;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 /*body{opacity: 0;}*/
@@ -677,8 +678,11 @@ $fontW900 : 900;
   font-size: 14px;
 }
 
-
-
 .toastProgress {
   background: #fff !important;
+}
+
+.appLayout{height: 100dvh; display: flex;flex-direction: column;
+  .mainSec{ flex: 1; }
+
 }

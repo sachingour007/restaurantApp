@@ -21,10 +21,8 @@ const Orders = () => {
           </div>
         ) : (
           <div className="emptyOrders">
-            <p>You haven’t placed any orders yet 🍽️</p>
-            <a href="/menu" className="btn">
-              Order Now
-            </a>
+            <p>No Data In Orders !!</p>
+            <button onClick={() => navigate("/menu")}>Make order</button>
           </div>
         )}
       </div>

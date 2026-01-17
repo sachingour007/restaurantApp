@@ -18,11 +18,13 @@ function UserMain() {
   }, [user]);
   if (loading) return null;
   return (
-    <>
+    <div className="appLayout">
       <Header />
-      <Outlet />
+      <main className="mainSec">
+        <Outlet />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

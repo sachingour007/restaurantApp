@@ -8,7 +8,7 @@ body.modal-open {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background: #0f172ae8;
+  background: #222831;
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@ body.modal-open {
   overflow: hidden;
 
   &__card {
-    background: #020617;
+    background: #141516;
     color: #ffffff;
     max-width: 420px;
     width: 100%;
@@ -73,14 +73,15 @@ body.modal-open {
   .btn {
     padding: 10px 18px;
     border-radius: 8px;
-    background: #f97316;
+    background: #e69c00;
     color: #fff;
     font-size: 14px;
     text-decoration: none;
     transition: 0.2s;
+    font-weight: 600;
 
     &:hover {
-      background: #ea580c;
+      background: #e69c00;
     }
   }
 }

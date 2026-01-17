@@ -8,6 +8,7 @@ import { addBooking } from "../../store/tableBookingSlice.js";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import BookingShow from "./BookingShow.jsx";
+import useBookingData from "../../hooks/useBookingData.js";
 
 const initialValues = {
   fullName: "",
@@ -20,6 +21,7 @@ const initialValues = {
 
 const TableBook = () => {
   const dispatch = useDispatch();
+  const getBookings = useBookingData() 
 
   const bookingHandler = async (val) => {
     try {
@@ -40,6 +42,7 @@ const TableBook = () => {
         try {
           const result = await bookingHandler(value);
           toast.success("Request has been submitted.");
+          getBookings()
           action.resetForm();
         } catch (error) {
           toast.error(error);
