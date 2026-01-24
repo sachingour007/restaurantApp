@@ -6,6 +6,8 @@ import { setCart } from "../../store/cartSlice";
 import axios from "axios";
 import { BASE_URL } from "../../constantFiles/baseURL";
 import { toast } from "react-toastify";
+import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
 
 const MenuCards = ({ items }) => {
   const { foodImage, foodName, description, price, _id, discount } = items;
@@ -31,7 +33,14 @@ const MenuCards = ({ items }) => {
   };
 
   return (
-    <div className="card">
+    <motion.div
+      className="card"
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -20, opacity: 0 }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      
+    >
       <div className="imgBox">
         <img src={foodImage} alt="foodImage" />
       </div>
@@ -54,7 +63,7 @@ const MenuCards = ({ items }) => {
       ) : (
         ""
       )}
-    </div>
+    </motion.div>
   );
 };
 

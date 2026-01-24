@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import MenuCards from "./MenuCards";
 import { Link } from "react-router-dom";
 import useMenuData from "../../hooks/useMenuData";
 import { useSelector } from "react-redux";
 import MenuShimmer from "../../shimmer Ui/MenuShimmer";
+import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
 
 const Menu = ({ showTab }) => {
   const getMenu = useMenuData();
@@ -61,13 +61,23 @@ const Menu = ({ showTab }) => {
                 </ul>
               </div>
             )}
+
             <div className="tabContent">
               {filteredItems.length > 0 ? (
-                <div className="allCards">
-                  {filteredItems.map((items) => {
-                    return <MenuCards key={items._id} items={items} />;
-                  })}
-                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={category}
+                    className="allCards"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{duration: 0.2}}
+                  >
+                    {filteredItems.map((items) => (
+                      <MenuCards items={items} key={items._id} />
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
               ) : (
                 <MenuShimmer val={9} />
               )}
