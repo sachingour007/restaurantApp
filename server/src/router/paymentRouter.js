@@ -21,10 +21,10 @@ paymentRouter.post(
 
 		const cart = await Cart.findOne({ _id: cartId });
 		if (!cart) {
-			return new ApiError(400, "Cart not found");
+			return next(new ApiError(400, "Cart not found"));
 		}
 
-		const receiptId = `order_rcpt_${_id}_${Date.now()}`;
+		const receiptId = `rcpt_${Date.now()}`;
 
 		const order = await instance.orders.create({
 			amount: Math.round(Number(cart.totalPrice.toFixed(2)) * 100),
@@ -56,10 +56,10 @@ paymentRouter.post(
 			new ApiResponse(
 				200,
 				{ savedPayment, keyId: process.env.KEY_ID },
-				"Order Created."
-			)
+				"Order Created.",
+			),
 		);
-	})
+	}),
 );
 
 paymentRouter.post(
@@ -69,7 +69,7 @@ paymentRouter.post(
 		const isWebhooksValid = validateWebhookSignature(
 			JSON.stringify(req.body),
 			webhookSignature,
-			process.env.RAZORPAY_WEBHOOKS_SECRET
+			process.env.RAZORPAY_WEBHOOKS_SECRET,
 		);
 
 		if (!isWebhooksValid) {
@@ -151,7 +151,7 @@ paymentRouter.post(
 						updatedAt: new Date(),
 					},
 				},
-				{ new: true }
+				{ new: true },
 			);
 		}
 
@@ -164,7 +164,7 @@ paymentRouter.post(
 		return res
 			.status(200)
 			.json(new ApiResponse(200, { success: true }, "Webhook processed"));
-	})
+	}),
 );
 
 paymentRouter.get(
@@ -178,7 +178,7 @@ paymentRouter.get(
 			return res
 				.status(200)
 				.json(
-					new ApiResponse(200, { status: "PENDING" }, "Payment Pending.")
+					new ApiResponse(200, { status: "PENDING" }, "Payment Pending."),
 				);
 		}
 
@@ -186,7 +186,7 @@ paymentRouter.get(
 			return res
 				.status(200)
 				.json(
-					new ApiResponse(200, { status: "SUCCESS" }, "Payment Sucess.")
+					new ApiResponse(200, { status: "SUCCESS" }, "Payment Sucess."),
 				);
 		}
 
@@ -195,14 +195,14 @@ paymentRouter.get(
 			return res
 				.status(200)
 				.json(
-					new ApiResponse(200, { status: "FAILED" }, "Payment Failed.")
+					new ApiResponse(200, { status: "FAILED" }, "Payment Failed."),
 				);
 		}
 
 		return res
 			.status(200)
 			.json(new ApiResponse(200, { status: "PENDING" }, "Payment Pending."));
-	})
+	}),
 );
 
 module.exports = { paymentRouter };

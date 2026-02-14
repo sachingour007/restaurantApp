@@ -49,33 +49,37 @@ const Cart = () => {
   };
 
   const checkoutHandler = async () => {
-    const res = await axios.post(
-      BASE_URL + "/payment/create",
-      { cartId: _id },
-      {
-        withCredentials: true,
-      }
-    );
-    const { savedPayment, keyId } = res.data.data;
-    const options = {
-      key: keyId,
-      amount: savedPayment.amount,
-      currency: savedPayment.currency,
-      name: "Hot Cornor",
-      description: "Testy Fast Food",
-      order_id: savedPayment.orderId,
-      prefill: {
-        name: savedPayment.notes.fullName,
-        email: savedPayment.notes.email,
-        contact: savedPayment.notes.phone,
-      },
-      theme: {
-        color: "#F37254",
-      },
-      handler: () => paymentVarifyHandler(savedPayment.orderId),
-    };
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    try {
+      const res = await axios.post(
+        BASE_URL + "/payment/create",
+        { cartId: _id },
+        {
+          withCredentials: true,
+        }
+      );
+      const { savedPayment, keyId } = res.data.data;
+      const options = {
+        key: keyId,
+        amount: savedPayment.amount,
+        currency: savedPayment.currency,
+        name: "Hot Cornor",
+        description: "Testy Fast Food",
+        order_id: savedPayment.orderId,
+        prefill: {
+          name: savedPayment.notes.fullName,
+          email: savedPayment.notes.email,
+          contact: savedPayment.notes.phone,
+        },
+        theme: {
+          color: "#F37254",
+        },
+        handler: () => paymentVarifyHandler(savedPayment.orderId),
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.log("PAYMENT ERROR:", error.response?.data || error.message);
+    }
   };
 
   return (

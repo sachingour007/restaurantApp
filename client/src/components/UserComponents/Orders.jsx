@@ -5,7 +5,7 @@ import OrderListShimmer from "../../shimmer Ui/OrderListShimmer";
 
 const Orders = () => {
   const { orders, loading } = useSelector((store) => store.orders);
-  console.log(orders, "7");
+
   return (
     <section className="myOrders">
       <div className="container">
