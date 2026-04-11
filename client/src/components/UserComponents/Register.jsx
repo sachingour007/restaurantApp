@@ -29,7 +29,7 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      return registerUserData.data;
+      return registerUserData;
     } catch (error) {
       throw error.response?.data?.message || "Server Error!";
     }
@@ -42,12 +42,8 @@ const Register = () => {
       onSubmit: async (values, action) => {
         try {
           const result = await userRegister(values);
+          console.log(result, "45");
           dispatch(addUser(result.data.data));
-          await axios.post(
-            BASE_URL + "/user/cart/cartinit",
-            {},
-            { withCredentials: true }
-          );
           action.resetForm();
           navigate("/");
           toast.success("Register SuccessFully.");
