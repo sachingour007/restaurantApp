@@ -35,6 +35,9 @@ const Header = () => {
       dispatch(removeUser());
       dispatch(clearBookings());
       navigate("/login", { replace: true });
+      if (navVisible) {
+        setNavVisible(false);
+      }
       toast.success("Logout Successfully");
     } catch (error) {
       toast.error(error.response?.data?.message);
@@ -151,6 +154,16 @@ const Header = () => {
           </div>
           <div className="mbl-user-items">
             <ul>
+              {user ? (
+                <NavLink to={"/"}>
+                  <li className="user-icon" onClick={logOutHandler}>
+                    <FontAwesomeIcon icon={faRightFromBracket} />
+                  </li>
+                </NavLink>
+              ) : (
+                ""
+              )}
+
               {user ? <li className="user-name">Hi, {nameShort[0]}</li> : ""}
               {user ? (
                 <NavLink to={"/cart"}>

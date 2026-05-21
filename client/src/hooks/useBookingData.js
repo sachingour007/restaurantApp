@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 const useBookingData = () => {
   const dispatch = useDispatch();
-  
 
   const getBookings = async () => {
     try {
